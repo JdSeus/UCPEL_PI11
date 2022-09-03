@@ -14,5 +14,8 @@ class Usuario(models.Model):
     email = models.CharField(max_length=255)
     senha = models.CharField(max_length=255)
     data_criacao = models.DateTimeField(default=timezone.now)
-    curriculo = models.ForeignKey(Curriculo, on_delete=models.DO_NOTHING)
+    curriculo = models.ForeignKey(Curriculo, on_delete=models.DO_NOTHING, blank=True, null=True)
+
+    def __str__(self):
+        return self.nome
 
