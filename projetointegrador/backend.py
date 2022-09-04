@@ -20,3 +20,4 @@ class UsuarioBackend(BaseBackend):
             return Usuario.objects.get(pk=usuario_id)
         except Usuario.DoesNotExist:
             return None
+

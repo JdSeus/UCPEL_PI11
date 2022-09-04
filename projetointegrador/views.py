@@ -1,10 +1,38 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import login as auth_login
 from django.core.validators import validate_email
 from .models import Usuario
 
 def index(request):
     return render(request, 'home/index.html')
+
+def login(request):
+    if request.method != 'POST':
+        return render(request, 'login/index.html')
+
+    email = request.POST.get('email')
+    senha = request.POST.get('senha')
+
+    if not email or not senha:
+        messages.error(request, 'Nenhum campo pode estar vazio.')
+
+    try: 
+        validate_email(email)
+    except:
+        messages.error(request, 'Email inválido')
+        return render(request, 'login/index.html')
+
+    try:
+        usuario = Usuario.objects.get(email=email)
+    except Usuario.DoesNotExist:
+        messages.error(request, 'Usuário não existe')
+        return render(request, 'login/index.html')
+
+    messages.success(request, 'Login Realizado com sucesso.')
+    auth_login(request, usuario, './backend.UsuarioBackend')
+    return render(request, 'login/index.html')
+
 
 def register(request):
     if request.method != 'POST':

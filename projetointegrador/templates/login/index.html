@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{%block conteudo%}
+
+<form method="POST" action="{% url 'login' %}">
+
+    {% csrf_token %}
+
+    {% if messages %}
+        <br>
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        <label>EMAIL</label>
+        <input type="email" name="email" value="{{ request.POST.email }}">
+    </div>
+
+    <div>
+        <label>SENHA</label>
+        <input type="password" name="senha" value="{{ request.POST.senha }}">
+    </div>
+
+    <button type="submit">LOGAR</button>
+
+</form>
+
+{%endblock%}
