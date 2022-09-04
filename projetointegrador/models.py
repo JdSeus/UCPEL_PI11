@@ -46,10 +46,6 @@ class Curriculo(models.Model):
     cursos = models.ManyToManyField(Curso, blank=True)
 class Usuario(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.CharField(max_length=255, unique=True)
-    nome = models.CharField(max_length=255)
-    sobrenome = models.CharField(max_length=255)
-    data_criacao = models.DateTimeField(default=timezone.now)
     curriculo = models.ForeignKey(Curriculo, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
@@ -88,4 +84,3 @@ class Aplicacao(models.Model):
         default=ANALYZING,
     )
     resposta = models.CharField(max_length=1023)
-    
