@@ -45,7 +45,11 @@ class Curriculo(models.Model):
     empresas = models.ManyToManyField(Historico, blank=True)
     cursos = models.ManyToManyField(Curso, blank=True)
 class Usuario(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    nome = models.CharField(max_length=255)
+    sobrenome = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    senha = models.CharField(max_length=255)
+    data_criacao = models.DateTimeField(default=timezone.now)
     curriculo = models.ForeignKey(Curriculo, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
