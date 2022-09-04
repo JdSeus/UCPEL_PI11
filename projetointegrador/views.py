@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.core.validators import validate_email
+from .models import Usuario
 
 def index(request):
     return render(request, 'home/index.html')
@@ -24,4 +25,22 @@ def register(request):
         messages.error(request, 'Email inválido')
         return render(request, 'register/index.html')
 
-    return render(request, 'register/index.html')
+    if len(senha) < 6:
+        messages.error(request, 'Senha precisa ter 6 caracteres ou mais.')
+        return render(request, 'register/index.html')
+
+    if senha != senha2:
+        messages.error(request, 'Senhas não conferem')
+        return render(request, 'register/index.html')
+
+    if Usuario.objects.filter(email=email).exists():
+        messages.error(request, 'Usuário já existe.')
+        return render(request, 'register/index.html')
+
+    usuario = Usuario.objects.create(nome=nome, sobrenome=sobrenome, email=email, senha=senha)
+
+    usuario.save()
+
+    messages.success(request, 'Registrado com sucesso! Agora faça login.')
+
+    return redirect('home')
