@@ -37,6 +37,8 @@ class Curso(models.Model):
     
 class Curriculo(models.Model):
     endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE, blank=True, null=True)
+    telefones = models.ManyToManyField(Telefone)
+    links = models.ManyToManyField(Link)
     escolaridade = models.ForeignKey(Escolaridade, on_delete=models.CASCADE, blank=True, null=True)
 
 
