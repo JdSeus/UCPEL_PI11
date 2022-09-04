@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{%block conteudo%}
+
+<form method="POST" action="{% url 'register' %}">
+
+    {% csrf_token %}
+
+    {% if messages %}
+        <br>
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        <label>NOME</label>
+        <input type="text" name="nome" value="{{ request.POST.nome }}">
+    </div>
+
+    <div>
+        <label>SOBRENOME</label>
+        <input type="text" name="sobrenome" value="{{ request.POST.sobrenome }}">
+    </div>
+
+    <div>
+        <label>EMAIL</label>
+        <input type="email" name="email" value="{{ request.POST.email }}">
+    </div>
+
+    <div>
+        <label>SENHA</label>
+        <input type="password" name="senha" value="{{ request.POST.senha }}">
+    </div>
+
+    <div>
+        <label>REPETIR SENHA</label>
+        <input type="password" name="senha2" value="{{ request.POST.senha2 }}">
+    </div>
+
+    <button type="submit">CADASTRAR</button>
+
+</form>
+
+{%endblock%}
