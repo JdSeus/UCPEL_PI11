@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
+
 
 class Endereco(models.Model):
     rua = models.CharField(max_length=255, blank=True)
@@ -42,12 +44,11 @@ class Curriculo(models.Model):
     escolaridade = models.ForeignKey(Escolaridade, on_delete=models.CASCADE)
     empresas = models.ManyToManyField(Historico, blank=True)
     cursos = models.ManyToManyField(Curso, blank=True)
-
 class Usuario(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email = models.CharField(max_length=255, unique=True)
     nome = models.CharField(max_length=255)
     sobrenome = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    senha = models.CharField(max_length=255)
     data_criacao = models.DateTimeField(default=timezone.now)
     curriculo = models.ForeignKey(Curriculo, on_delete=models.CASCADE, blank=True, null=True)
 
@@ -64,9 +65,8 @@ class Vaga(models.Model):
     publicar = models.BooleanField()
     categoria = models.ManyToManyField(CategoriaVaga, blank=True)
 class Empresa(models.Model):
-    cnpj = models.CharField(max_length=255)
+    cnpj = models.CharField(max_length=255, unique=True)
     nome_social = models.CharField(max_length=255)
-    senha = models.CharField(max_length=255)
     categoria = models.ManyToManyField(Vaga, blank=True)
 
 class Aplicacao(models.Model):
@@ -88,3 +88,4 @@ class Aplicacao(models.Model):
         default=ANALYZING,
     )
     resposta = models.CharField(max_length=1023)
+    

@@ -9,8 +9,7 @@ from .models import Curriculo
 from .models import Usuario
 
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('id','nome', 'sobrenome', 'email', 'senha')
-    list_display_links = ('id', 'nome', 'sobrenome')
+    pass
 
 class CurriculoAdmin(admin.ModelAdmin):
     pass
