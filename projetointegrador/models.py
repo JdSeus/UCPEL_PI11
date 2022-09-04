@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractBaseUser
 
 
 class Endereco(models.Model):
@@ -44,13 +44,14 @@ class Curriculo(models.Model):
     escolaridade = models.ForeignKey(Escolaridade, on_delete=models.CASCADE)
     empresas = models.ManyToManyField(Historico, blank=True)
     cursos = models.ManyToManyField(Curso, blank=True)
-class Usuario(models.Model):
+class Usuario(AbstractBaseUser):
     nome = models.CharField(max_length=255)
     sobrenome = models.CharField(max_length=255)
-    email = models.CharField(max_length=255)
-    senha = models.CharField(max_length=255)
+    email = models.CharField(max_length=255, unique=True)
     data_criacao = models.DateTimeField(default=timezone.now)
     curriculo = models.ForeignKey(Curriculo, on_delete=models.CASCADE, blank=True, null=True)
+
+    USERNAME_FIELD = 'email'
 
     def __str__(self):
         return self.nome
