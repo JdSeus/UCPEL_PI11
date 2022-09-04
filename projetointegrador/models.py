@@ -17,21 +17,21 @@ class Link(models.Model):
 class Escolaridade(models.Model):
     instituicao = models.CharField(max_length=255)
     curso = models.CharField(max_length=255)
-    observacao = models.CharField(max_length=1024)
+    observacao = models.CharField(max_length=1023)
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
     
 class Historico(models.Model):
     empresa = models.CharField(max_length=255)
     cargo = models.CharField(max_length=255)
-    descricao = models.CharField(max_length=1024)
+    descricao = models.CharField(max_length=1023)
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
 
 class Curso(models.Model):
     instituicao = models.CharField(max_length=255)
     titulo = models.CharField(max_length=255)
-    descricao = models.CharField(max_length=1024)
+    descricao = models.CharField(max_length=1023)
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
     
@@ -54,3 +54,37 @@ class Usuario(models.Model):
     def __str__(self):
         return self.nome
 
+class CategoriaVaga(models.Model):
+    titulo = models.CharField(max_length=255)
+
+class Vaga(models.Model):
+    titulo = models.CharField(max_length=255)
+    descricao = models.CharField(max_length=1023)
+    concluida = models.BooleanField()
+    publicar = models.BooleanField()
+    categoria = models.ManyToManyField(CategoriaVaga, blank=True)
+class Empresa(models.Model):
+    cnpj = models.CharField(max_length=255)
+    nome_social = models.CharField(max_length=255)
+    senha = models.CharField(max_length=255)
+    categoria = models.ManyToManyField(Vaga, blank=True)
+
+class Aplicacao(models.Model):
+    ACCEPTED = 'AC'
+    ANALYZING = 'AN'
+    REJECTED = 'RJ'
+
+    STATUSES = [
+        (ACCEPTED, 'Aprovado'),
+        (ANALYZING, 'Analisando'),
+        (REJECTED, 'Rejeitado'),
+    ]
+
+    curriculos = models.ManyToManyField(Curriculo, blank=True)
+    vagas = models.ManyToManyField(Vaga, blank=True)
+    status = models.CharField(
+        max_length=2,
+        choices=STATUSES,
+        default=ANALYZING,
+    )
+    resposta = models.CharField(max_length=1023)
