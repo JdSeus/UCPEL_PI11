@@ -30,7 +30,7 @@ def login(request):
         return render(request, 'login/index.html')
 
     messages.success(request, 'Login Realizado com sucesso.')
-    auth_login(request, usuario, './backend.UsuarioBackend')
+    auth_login(request, usuario, 'projetointegrador.backend.UsuarioBackend')
     return render(request, 'login/index.html')
 
 
