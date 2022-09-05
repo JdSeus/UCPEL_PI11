@@ -1,8 +1,11 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.core.validators import validate_email
+from django.contrib.auth.decorators import login_required
 from .models import Usuario
+
 
 def index(request):
     return render(request, 'home/index.html')
@@ -31,8 +34,11 @@ def login(request):
 
     messages.success(request, 'Login Realizado com sucesso.')
     auth_login(request, usuario, 'projetointegrador.backend.UsuarioBackend')
-    return render(request, 'login/index.html')
+    return redirect('dashboard-usuario')
 
+def logout(request):
+    auth_logout(request)
+    return redirect('index')
 
 def register(request):
     if request.method != 'POST':
@@ -72,3 +78,7 @@ def register(request):
     messages.success(request, 'Registrado com sucesso! Agora faça login.')
 
     return redirect('home')
+
+@login_required(login_url='login')
+def dashboard_usuario(request):
+    return render(request, 'dashboard-usuario/index.html')
