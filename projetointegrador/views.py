@@ -10,9 +10,9 @@ from .models import Usuario
 def index(request):
     return render(request, 'home/index.html')
 
-def login(request):
+def login_usuario(request):
     if request.method != 'POST':
-        return render(request, 'login/index.html')
+        return render(request, 'login-usuario/index.html')
 
     email = request.POST.get('email')
     senha = request.POST.get('senha')
@@ -24,25 +24,25 @@ def login(request):
         validate_email(email)
     except:
         messages.error(request, 'Email inválido')
-        return render(request, 'login/index.html')
+        return render(request, 'login-usuario/index.html')
 
     try:
         usuario = Usuario.objects.get(email=email)
     except Usuario.DoesNotExist:
         messages.error(request, 'Usuário não existe')
-        return render(request, 'login/index.html')
+        return render(request, 'login-usuario/index.html')
 
     messages.success(request, 'Login Realizado com sucesso.')
     auth_login(request, usuario, 'projetointegrador.backend.UsuarioBackend')
     return redirect('dashboard-usuario')
 
-def logout(request):
+def logout_usuario(request):
     auth_logout(request)
-    return redirect('index')
+    return redirect('home')
 
-def register(request):
+def register_usuario(request):
     if request.method != 'POST':
-        return render(request, 'register/index.html')
+        return render(request, 'register-usuario/index.html')
 
     nome = request.POST.get('nome')
     sobrenome = request.POST.get('sobrenome')
@@ -57,27 +57,28 @@ def register(request):
         validate_email(email)
     except:
         messages.error(request, 'Email inválido')
-        return render(request, 'register/index.html')
+        return render(request, 'register-usuario/index.html')
 
     if len(senha) < 6:
         messages.error(request, 'Senha precisa ter 6 caracteres ou mais.')
-        return render(request, 'register/index.html')
+        return render(request, 'register-usuario/index.html')
 
     if senha != senha2:
         messages.error(request, 'Senhas não conferem')
-        return render(request, 'register/index.html')
+        return render(request, 'register-usuario/index.html')
 
     if Usuario.objects.filter(email=email).exists():
         messages.error(request, 'Usuário já existe.')
-        return render(request, 'register/index.html')
+        return render(request, 'register-usuario/index.html')
 
-    usuario = Usuario.objects.create(nome=nome, sobrenome=sobrenome, email=email, senha=senha)
+    usuario = Usuario.objects.create(nome=nome, sobrenome=sobrenome, email=email, password=senha)
 
     usuario.save()
 
     messages.success(request, 'Registrado com sucesso! Agora faça login.')
 
-    return redirect('home')
+    auth_login(request, usuario, 'projetointegrador.backend.UsuarioBackend')
+    return redirect('dashboard-usuario')
 
 @login_required(login_url='login')
 def dashboard_usuario(request):
