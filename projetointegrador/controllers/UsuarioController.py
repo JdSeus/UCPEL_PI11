@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.core.validators import validate_email
+
 from ..models import Usuario
 
 class UsuarioController():
@@ -16,6 +17,7 @@ class UsuarioController():
 
         if not email or not senha:
             messages.error(request, 'Nenhum campo pode estar vazio.')
+            return render(request, 'login-usuario/index.html')
 
         try: 
             validate_email(email)
@@ -49,6 +51,7 @@ class UsuarioController():
 
         if not nome or not sobrenome or not email or not senha or not senha2:
             messages.error(request, 'Nenhum campo pode estar vazio.')
+            return render(request, 'register-usuario/index.html')
 
         try: 
             validate_email(email)

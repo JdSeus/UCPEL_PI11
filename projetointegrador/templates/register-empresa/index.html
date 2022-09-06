@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{%block conteudo%}
+
+<form method="POST" action="{% url 'register-empresa' %}">
+
+    {% csrf_token %}
+
+    {% if messages %}
+        <br>
+        {% for message in messages %}
+            <div class="alert {{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <div>
+        <label>NOME SOCIAL</label>
+        <input type="text" name="nome_social" value="{{ request.POST.nome_social }}">
+    </div>
+
+    <div>
+        <label>CNPJ</label>
+        <input type="text" name="cnpj" value="{{ request.POST.cnpj }}">
+    </div>
+
+    <div>
+        <label>SENHA</label>
+        <input type="password" name="senha" value="{{ request.POST.senha }}">
+    </div>
+
+    <div>
+        <label>REPETIR SENHA</label>
+        <input type="password" name="senha2" value="{{ request.POST.senha2 }}">
+    </div>
+
+    <button type="submit">CADASTRAR</button>
+
+</form>
+
+{%endblock%}

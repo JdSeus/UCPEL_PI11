@@ -82,7 +82,7 @@ DATABASES = {
     }
 }
 
-AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend', 'projetointegrador.backend.UsuarioBackend']
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.ModelBackend', 'projetointegrador.backend.UsuarioBackend', 'projetointegrador.backend.EmpresaBackend']
 
 
 # Password validation
