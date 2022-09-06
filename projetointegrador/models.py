@@ -65,10 +65,15 @@ class Vaga(models.Model):
     concluida = models.BooleanField()
     publicar = models.BooleanField()
     categoria = models.ManyToManyField(CategoriaVaga, blank=True)
-class Empresa(models.Model):
+class Empresa(AbstractBaseUser):
     cnpj = models.CharField(max_length=255, unique=True)
     nome_social = models.CharField(max_length=255)
     categoria = models.ManyToManyField(Vaga, blank=True)
+
+    USERNAME_FIELD = 'cnpj'
+
+    def __str__(self):
+        return self.nome_social
 
 class Aplicacao(models.Model):
     ACCEPTED = 'AC'
