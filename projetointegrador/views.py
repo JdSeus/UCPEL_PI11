@@ -4,6 +4,7 @@ from .controllers.HomeController import HomeController
 from .controllers.DashboardUsuarioController import DashboardUsuarioController
 from .controllers.DashboardEmpresaController import DashboardEmpresaController
 from .controllers.CheckDashboardController import CheckDashboardController
+from .controllers.CurriculoController import CurriculoController
 
 
 def index(request):
@@ -35,3 +36,6 @@ def dashboard_empresa(request):
 
 def check_dashboard(request):
     return CheckDashboardController.index(request)
+
+def curriculo(request):
+    return CurriculoController.index(request)

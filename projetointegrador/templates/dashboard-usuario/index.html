@@ -8,10 +8,12 @@
             <a class="block hover:text-blue-800" href="{% url 'logout-usuario' %}">Deslogar</a>
         </div>
         <div class="mb-[20px]">
-            Olá {{ user.first_name }} {{ user.last_name }}
-        </div>
-        <div class="mb-[20px]">
             Olá {{ user }}
+        </div>
+        <div class="">
+            <a class="font-bold block hover:text-blue-800" href="#">
+                Meu Currículo
+            </a>
         </div>
     </div> 
 </div>
