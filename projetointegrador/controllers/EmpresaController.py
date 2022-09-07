@@ -8,6 +8,9 @@ from ..models import Empresa
 class EmpresaController():
 
     def login_empresa(request):
+        if request.user.is_authenticated:
+            return redirect('dashboard-empresa')
+
         if request.method != 'POST':
             return render(request, 'login-empresa/index.html')
 
@@ -33,6 +36,9 @@ class EmpresaController():
         return redirect('home')
 
     def register_empresa(request):
+        if request.user.is_authenticated:
+            return redirect('dashboard-empresa')
+            
         if request.method != 'POST':
             return render(request, 'register-empresa/index.html')
 

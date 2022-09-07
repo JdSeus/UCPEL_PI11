@@ -9,6 +9,9 @@ from ..models import Usuario
 class UsuarioController():
 
     def login_usuario(request):
+        if request.user.is_authenticated:
+            return redirect('dashboard-usuario')
+
         if request.method != 'POST':
             return render(request, 'login-usuario/index.html')
 
@@ -40,6 +43,9 @@ class UsuarioController():
         return redirect('home')
 
     def register_usuario(request):
+        if request.user.is_authenticated:
+            return redirect('dashboard-empresa')
+
         if request.method != 'POST':
             return render(request, 'register-usuario/index.html')
 
