@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import make_password
 
 from ..models import Empresa
 
@@ -19,12 +21,18 @@ class EmpresaController():
 
         if not cnpj or not senha:
             messages.error(request, 'Nenhum campo pode estar vazio.')
-            return render(request, 'login-usuario/index.html')
+            return render(request, 'login-empresa/index.html')
 
         try:
             empresa = Empresa.objects.get(cnpj=cnpj)
         except Empresa.DoesNotExist:
             messages.error(request, 'Usuário não existe')
+            return render(request, 'login-empresa/index.html')
+
+        ispasswordcorrect = check_password(senha, empresa.password)
+
+        if not ispasswordcorrect:
+            messages.error(request, 'Senha incorreta')
             return render(request, 'login-empresa/index.html')
 
         auth_login(request, empresa, 'projetointegrador.backend.EmpresaBackend')
@@ -63,6 +71,9 @@ class EmpresaController():
             return render(request, 'register-empresa/index.html')
 
         empresa = Empresa.objects.create(nome_social=nome_social, cnpj=cnpj, password=senha)
+
+        hashedpassword = make_password(senha)
+        empresa.password = hashedpassword
 
         empresa.save()
 

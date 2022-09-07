@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.hashers import check_password
+from django.contrib.auth.hashers import make_password
 from django.core.validators import validate_email
+
 
 from ..models import Usuario
 
@@ -32,6 +35,12 @@ class UsuarioController():
             usuario = Usuario.objects.get(email=email)
         except Usuario.DoesNotExist:
             messages.error(request, 'Usuário não existe')
+            return render(request, 'login-usuario/index.html')
+
+        ispasswordcorrect = check_password(senha, usuario.password)
+
+        if not ispasswordcorrect:
+            messages.error(request, 'Senha incorreta')
             return render(request, 'login-usuario/index.html')
 
         auth_login(request, usuario, 'projetointegrador.backend.UsuarioBackend')
@@ -78,6 +87,9 @@ class UsuarioController():
 
         usuario = Usuario.objects.create(nome=nome, sobrenome=sobrenome, email=email, password=senha)
 
+        hashedpassword = make_password(senha)
+        usuario.password = hashedpassword
+        
         usuario.save()
 
         auth_login(request, usuario, 'projetointegrador.backend.UsuarioBackend')
