@@ -53,6 +53,16 @@ class Usuario(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
 
+    @property
+    def is_staff(self):
+        return False
+
+    def has_perm(self, perm, obj=None):
+        return False
+
+    def has_module_perms(self, app_label):
+        return False
+
     def __str__(self):
         return self.nome
 
@@ -71,6 +81,16 @@ class Empresa(AbstractBaseUser):
     categoria = models.ManyToManyField(Vaga, blank=True)
 
     USERNAME_FIELD = 'cnpj'
+
+    @property
+    def is_staff(self):
+        return False
+
+    def has_perm(self, perm, obj=None):
+        return False
+
+    def has_module_perms(self, app_label):
+        return False
 
     def __str__(self):
         return self.nome_social

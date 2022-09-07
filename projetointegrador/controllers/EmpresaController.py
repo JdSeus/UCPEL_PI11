@@ -27,7 +27,6 @@ class EmpresaController():
             messages.error(request, 'Usuário não existe')
             return render(request, 'login-empresa/index.html')
 
-        messages.success(request, 'Login Realizado com sucesso.')
         auth_login(request, empresa, 'projetointegrador.backend.EmpresaBackend')
         return redirect('dashboard-empresa')
 
@@ -66,8 +65,6 @@ class EmpresaController():
         empresa = Empresa.objects.create(nome_social=nome_social, cnpj=cnpj, password=senha)
 
         empresa.save()
-
-        messages.success(request, 'Registrado com sucesso! Agora faça login.')
 
         auth_login(request, empresa, 'projetointegrador.backend.EmpresaBackend')
         return redirect('dashboard-empresa')

@@ -34,7 +34,6 @@ class UsuarioController():
             messages.error(request, 'Usuário não existe')
             return render(request, 'login-usuario/index.html')
 
-        messages.success(request, 'Login Realizado com sucesso.')
         auth_login(request, usuario, 'projetointegrador.backend.UsuarioBackend')
         return redirect('dashboard-usuario')
 
@@ -80,8 +79,6 @@ class UsuarioController():
         usuario = Usuario.objects.create(nome=nome, sobrenome=sobrenome, email=email, password=senha)
 
         usuario.save()
-
-        messages.success(request, 'Registrado com sucesso! Agora faça login.')
 
         auth_login(request, usuario, 'projetointegrador.backend.UsuarioBackend')
         return redirect('dashboard-usuario')
