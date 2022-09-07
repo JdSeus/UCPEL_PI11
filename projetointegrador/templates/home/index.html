@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
 
 {%block conteudo%}
-HOME
+
+<section>
+    <div class="text-[24px] font-bold text-center py-[50px]">
+        PROJETO INTEGRADOR MÓDULO 11
+    </div>
+    <div class="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] p-6 bg-slate-300">
+        <div class="flex justify-center items-center">
+            <div class="text-[20px] font-bold">
+                <a href="{% url 'login-usuario' %}">Logar Usuario</a>
+            </div>
+            <div class="text-[20px] font-bold ml-[20px]">
+                <a href="{% url 'login-empresa' %}">Logar Empresa</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 {%endblock%}
