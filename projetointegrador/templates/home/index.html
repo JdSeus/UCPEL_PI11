@@ -3,12 +3,15 @@
 {%block conteudo%}
 
 <section>
-    <div class="absolute top-[calc(50%-90px)] left-[50%] translate-x-[-50%] translate-y-[-50%] ">
-        <div class="flex justify-center items-center">
-            <a class="block text-[20px] font-bold ml-[20px] p-[16px] bg-slate-300" href="{% url 'login-usuario' %}">Logar Usuario</a>
-            <a class="block text-[20px] font-bold ml-[20px] p-[16px] bg-slate-300" href="{% url 'login-empresa' %}">Logar Empresa</a>
+    <div class="relative min-h-[calc(100vh-90px-20vh)]">
+        <div class="absolute top-[calc(50%-90px)] left-[50%] translate-x-[-50%] translate-y-[-50%] ">
+            <div class="flex justify-center items-center">
+                <a class="block text-[20px] font-bold ml-[20px] p-[16px] bg-slate-300" href="{% url 'login-usuario' %}">Logar Usuario</a>
+                <a class="block text-[20px] font-bold ml-[20px] p-[16px] bg-slate-300" href="{% url 'login-empresa' %}">Logar Empresa</a>
+            </div>
         </div>
     </div>
+
 </section>
 
 {%endblock%}
