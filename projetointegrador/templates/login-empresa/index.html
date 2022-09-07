@@ -2,31 +2,47 @@
 
 {%block conteudo%}
 
-<form method="POST" action="{% url 'login-empresa' %}">
+<div class="min-h-[calc(100vh-90px-20vh)] flex items-center">
+    <form class="block p-[16px] bg-slate-300  m-auto" method="POST" action="{% url 'login-empresa' %}">
 
-    {% csrf_token %}
+        {% csrf_token %}
 
-    {% if messages %}
-        <br>
-        {% for message in messages %}
-            <div class="alert {{ message.tags }}" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endif %}
+        <div class="font-bold mb-[20px] text-center">
+            LOGAR EMPRESA
+        </div>
 
-    <div>
-        <label>CNPJ</label>
-        <input type="text" name="cnpj" value="{{ request.POST.cnpj }}">
-    </div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="text-center text-red-600 mt-[20px] mb-[20px]" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    
+        <div class="mb-[20px]">
+            <label for="cnpj" class="block text-[14px] mb-[0.5rem] font-[500] text-gray-900">E-mail</label>
+            <input required class="block outline-none w-[100%] p-[5px] bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500" type="cnpj" name="cnpj" value="{{ request.POST.cnpj }}">
+        </div>
 
-    <div>
-        <label>SENHA</label>
-        <input type="password" name="senha" value="{{ request.POST.senha }}">
-    </div>
+        <div class="mb-[20px]">
+            <label for="senha" class="block text-[14px] mb-[0.5rem] font-[500] text-gray-900">Senha</label>
+            <input required class="block outline-none w-[100%] p-[5px] bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500" type="password" name="senha" value="{{ request.POST.senha }}">
+        </div>
 
-    <button type="submit">LOGAR</button>
+        <div class="text-[14px] text-center mb-[20px]">
+            Sem conta? <a class="hover:text-blue-800" href="{% url 'register-empresa' %}">Registre-se </a>
+        </div>
+    
+        <button class="block mx-auto text-[14px] font-[500] px-[20px] py-[10px] text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-sm w-full sm:w-auto text-center" type="submit">LOGAR</button>
 
-</form>
+        <div class="text-[14px] mt-[20px] text-center">
+            <a class="hover:text-blue-800" href="{% url 'home' %}">
+                Voltar para Home
+            </a>
+        </div>
+       
+    
+    </form>
+</div>
 
 {%endblock%}

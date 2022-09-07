@@ -7,18 +7,17 @@
 
         {% csrf_token %}
     
+        <div class="font-bold mb-[20px] text-center">
+            LOGAR USUÁRIO
+        </div>
+
         {% if messages %}
-            <br>
             {% for message in messages %}
-                <div class="alert {{ message.tags }}" role="alert">
+                <div class="text-center text-red-600 mt-[20px] mb-[20px]" role="alert">
                     {{ message }}
                 </div>
             {% endfor %}
         {% endif %}
-
-        <div class="font-bold mb-[20px] text-center">
-            LOGAR USUÁRIO
-        </div>
     
         <div class="mb-[20px]">
             <label for="email" class="block text-[14px] mb-[0.5rem] font-[500] text-gray-900">E-mail</label>
