@@ -3,6 +3,7 @@ from .controllers.EmpresaController import EmpresaController
 from .controllers.HomeController import HomeController
 from .controllers.DashboardUsuarioController import DashboardUsuarioController
 from .controllers.DashboardEmpresaController import DashboardEmpresaController
+from .controllers.CheckDashboardController import CheckDashboardController
 
 
 def index(request):
@@ -31,3 +32,6 @@ def register_empresa(request):
 
 def dashboard_empresa(request):
     return DashboardEmpresaController.index(request)
+
+def check_dashboard(request):
+    return CheckDashboardController.index(request)

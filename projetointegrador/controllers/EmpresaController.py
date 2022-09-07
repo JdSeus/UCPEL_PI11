@@ -9,7 +9,7 @@ class EmpresaController():
 
     def login_empresa(request):
         if request.user.is_authenticated:
-            return redirect('dashboard-empresa')
+            return redirect('check-dashboard')
 
         if request.method != 'POST':
             return render(request, 'login-empresa/index.html')
@@ -37,7 +37,7 @@ class EmpresaController():
 
     def register_empresa(request):
         if request.user.is_authenticated:
-            return redirect('dashboard-empresa')
+            return redirect('check-dashboard')
             
         if request.method != 'POST':
             return render(request, 'register-empresa/index.html')

@@ -10,7 +10,7 @@ class UsuarioController():
 
     def login_usuario(request):
         if request.user.is_authenticated:
-            return redirect('dashboard-usuario')
+            return redirect('check-dashboard')
 
         if request.method != 'POST':
             return render(request, 'login-usuario/index.html')
@@ -44,7 +44,7 @@ class UsuarioController():
 
     def register_usuario(request):
         if request.user.is_authenticated:
-            return redirect('dashboard-empresa')
+            return redirect('check-dashboard')
 
         if request.method != 'POST':
             return render(request, 'register-usuario/index.html')
