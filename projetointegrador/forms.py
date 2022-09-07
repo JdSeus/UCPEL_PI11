@@ -1,4 +1,9 @@
 from django import forms
+from django.forms import ModelForm
 
-class NameForm(forms.Form):
-    your_name = forms.CharField(label='Your name', max_length=100)
+from .models import Curriculo
+
+class CurriculoForm(ModelForm):
+    class Meta:
+        model = Curriculo
+        fields = ['endereco', 'telefones', 'links', 'escolaridade', 'empresas', 'cursos']
