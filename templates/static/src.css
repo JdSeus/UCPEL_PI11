@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.modal-container {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+  }
+  .modal-container .modal-item {
+    max-height: 100vh;
+    overflow: scroll;
+    margin-top: 2rem;
+    background-color: #f3f3f3;
+    padding: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    min-width: 300px;
+  }
+  
+  .modal-container.active {
+    display: flex;
+  }

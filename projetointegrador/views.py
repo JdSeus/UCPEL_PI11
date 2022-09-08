@@ -6,6 +6,9 @@ from .controllers.DashboardEmpresaController import DashboardEmpresaController
 from .controllers.CheckDashboardController import CheckDashboardController
 from .controllers.CurriculoController import CurriculoController
 
+from .forms import NameForm
+
+from django.shortcuts import render
 
 def index(request):
     return HomeController.index(request)
@@ -39,3 +42,9 @@ def check_dashboard(request):
 
 def curriculo(request):
     return CurriculoController.index(request)
+
+def add_movie(request):
+    form = NameForm()
+    return render(request, 'movie_form.html', {
+        'form': form,
+    })
