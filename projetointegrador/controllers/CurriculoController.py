@@ -1,8 +1,10 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.http import HttpResponse
 
 from ..forms import CurriculoForm
 
+from ..forms import NameForm
 class CurriculoController():
 
     def index(request):
@@ -22,3 +24,14 @@ class CurriculoController():
             form = CurriculoForm()
 
         return render(request, 'curriculo/index.html', {'form': form})
+
+    def ajax_adicionar_endereco(request):
+        if request.method == "POST":
+            form = NameForm(request.POST)
+            if form.is_valid():
+                return HttpResponse(status=204, headers={'HX-Trigger': 'enderecoListChanged'})
+        else:
+            form = NameForm()
+        return render(request, 'curriculo/endereco_form.html', {
+            'form': form,
+        })
