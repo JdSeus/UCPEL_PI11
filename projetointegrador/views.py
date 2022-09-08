@@ -9,6 +9,7 @@ from .controllers.CurriculoController import CurriculoController
 from .forms import NameForm
 
 from django.shortcuts import render
+from django.http import HttpResponse
 
 def index(request):
     return HomeController.index(request)
@@ -44,7 +45,12 @@ def curriculo(request):
     return CurriculoController.index(request)
 
 def add_movie(request):
-    form = NameForm()
+    if request.method == "POST":
+        form = NameForm(request.POST)
+        if form.is_valid():
+            return HttpResponse(status=204)
+    else:
+        form = NameForm()
     return render(request, 'movie_form.html', {
         'form': form,
     })

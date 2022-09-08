@@ -8,6 +8,9 @@
 <div class="min-h-[calc(100vh-90px-20vh)] flex items-center">
     <div class="block p-[16px] bg-slate-300  m-auto">
 
+        <tbody hx-trigger="load, movieListChanged from:body" hx-target="this">
+        </tbody>
+
         <button hx-get="{% url 'add-movie' %}" hx-target="#js-dialog">
             Add a movie
         </button>
@@ -41,9 +44,17 @@
     const modal = document.getElementById("js-modal")
 
     htmx.on("htmx:afterSwap", (e) => {
-    // Response targeting #dialog => show the modal
+        // Response targeting #js-dialog => show the modal
         if (e.detail.target.id == "js-dialog") {
             modal.classList.add('active');
+        }
+    })
+
+    htmx.on("htmx:beforeSwap", (e) => {
+        // Empty response targeting #js-dialog => hide the modal
+        if (e.detail.target.id == "js-dialog" && !e.detail.xhr.response) {
+            modal.classList.remove('active');
+            e.detail.shouldSwap = false
         }
     })
 </script>
