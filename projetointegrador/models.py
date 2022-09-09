@@ -53,6 +53,10 @@ class Usuario(AbstractBaseUser):
 
     USERNAME_FIELD = 'email'
 
+    @staticmethod
+    def user_is_Usuario(user):
+        return user.is_authenticated and isinstance(user, Usuario)
+
     @property
     def is_staff(self):
         return False
@@ -81,6 +85,10 @@ class Empresa(AbstractBaseUser):
     categoria = models.ManyToManyField(Vaga, blank=True)
 
     USERNAME_FIELD = 'cnpj'
+
+    @staticmethod
+    def user_is_Empresa(user):
+        return user.is_authenticated and isinstance(user, Empresa)
 
     @property
     def is_staff(self):
