@@ -44,6 +44,7 @@ class UsuarioController():
             return render(request, 'login-usuario/index.html')
 
         auth_login(request, usuario, 'projetointegrador.backend.UsuarioBackend')
+        
         return redirect('dashboard-usuario')
 
     def logout_usuario(request):

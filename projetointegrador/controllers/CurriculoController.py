@@ -1,13 +1,15 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import user_passes_test
 
 from ..forms import CurriculoForm
 from ..forms import EnderecoForm
 
-from ..forms import NameForm
+from ..models import Usuario
 class CurriculoController():
 
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def index(request):
         # if this is a POST request we need to process the form data
         if request.method == 'POST':
