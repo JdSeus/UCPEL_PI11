@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from ..forms import CurriculoForm
+from ..forms import EnderecoForm
 
 from ..forms import NameForm
 class CurriculoController():
@@ -27,11 +28,11 @@ class CurriculoController():
 
     def ajax_adicionar_endereco(request):
         if request.method == "POST":
-            form = NameForm(request.POST)
+            form = EnderecoForm(request.POST)
             if form.is_valid():
                 return HttpResponse(status=204, headers={'HX-Trigger': 'enderecoListChanged'})
         else:
-            form = NameForm()
+            form = EnderecoForm()
         return render(request, 'curriculo/endereco_form.html', {
             'form': form,
         })

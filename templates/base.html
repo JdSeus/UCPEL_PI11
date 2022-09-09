@@ -18,13 +18,9 @@
 
     <div id="js-modal" class="modal-container">
         <div class="modal-item relative">
-            <div class="flex justify-end">
-                <div
-                class="absolute cursor-pointer text-[30px] leading-[1] mr-[-30px]"
-                onclick="this.parentElement.parentElement.parentElement.classList.remove('active');">
+                <div class="absolute cursor-pointer text-[30px] leading-[1] top-0 right-[5px]" onclick="this.parentElement.parentElement.classList.remove('active');">
                     ×
                 </div>
-            </div>
             <div id="js-dialog" hx-target="this"></div>
         </div>
     </div>
