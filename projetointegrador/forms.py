@@ -10,7 +10,7 @@ class NameForm(forms.Form):
 class CurriculoForm(ModelForm):
     class Meta:
         model = Curriculo
-        fields = ['endereco', 'telefones', 'links', 'escolaridade', 'empresas', 'cursos']
+        exclude = []
 
 class EnderecoForm(ModelForm):
         class Meta:

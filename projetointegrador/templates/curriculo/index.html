@@ -11,16 +11,27 @@
         </div>
 
         <div>
-            {{ usuario }}
+            <div class="flex justify-center">
+                <div>
+                    Endereço:   
+                </div>
+                <div class="ml-[5px]">
+                    {{ usuario.curriculo.endereco.rua }}   
+                </div>
+                <div class="ml-[10px]">
+                    {{ usuario.curriculo.endereco.bairro }}   
+                </div>
+                <div class="ml-[10px]">
+                    {{ usuario.curriculo.endereco.cidade }}   
+                </div>
+                <div class="ml-[10px]">
+                    {{ usuario.curriculo.endereco.estado }}   
+                </div>
+            </div>
+            <div class="cursor-point w-fit text-right p-[5px] bg-green-300" hx-get="{% url 'ajax-adicionar-endereco' %}" hx-target="#js-dialog">
+                Editar Endereco
+            </div>
         </div>
-
-        <div>
-            
-        </div>
-
-        <button hx-get="{% url 'ajax-adicionar-endereco' %}" hx-target="#js-dialog">
-            Editar Endereco
-        </button>
 
     </div> 
 </div>
