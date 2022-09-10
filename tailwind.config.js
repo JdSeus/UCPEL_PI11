@@ -1,15 +1,11 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 const plugin = require('tailwindcss/plugin')
 
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: [
+  content: [
     './templates/**/*.{html,js}',
     './projetointegrador/templates/**/*.{html,js}',
-    './resources/**/*.js',
-    './resources/**/*.vue',
   ],
-  content: [],
   theme: {
     screens: {
       'xsm': '400px',

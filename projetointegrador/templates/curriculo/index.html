@@ -10,25 +10,25 @@
             CURRÍCULO
         </div>
 
-        <div>
-            <div class="flex justify-center">
+        <div class="mb-[10px]">
+            <div class="font-bold">
+                Endereço:   
+            </div>
+            <div class="flex justify-center mb-[5px]">
                 <div>
-                    Endereço:   
-                </div>
-                <div class="ml-[5px]">
                     {{ usuario.curriculo.endereco.rua }}   
                 </div>
-                <div class="ml-[10px]">
+                <div class="ml-[5px]">
                     {{ usuario.curriculo.endereco.bairro }}   
                 </div>
-                <div class="ml-[10px]">
+                <div class="ml-[5px]">
                     {{ usuario.curriculo.endereco.cidade }}   
                 </div>
-                <div class="ml-[10px]">
+                <div class="ml-[5px]">
                     {{ usuario.curriculo.endereco.estado }}   
                 </div>
             </div>
-            <div class="cursor-point w-fit text-right p-[5px] bg-green-300" hx-get="{% url 'ajax-adicionar-endereco' %}" hx-target="#js-dialog">
+            <div class="cursor-pointer w-fit p-[5px] bg-green-300" hx-get="{% url 'ajax-adicionar-endereco' %}" hx-target="#js-dialog">
                 Editar Endereco
             </div>
         </div>
