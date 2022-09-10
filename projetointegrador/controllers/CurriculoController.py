@@ -71,6 +71,7 @@ class CurriculoController():
                     form = EnderecoForm()
                 else:
                     form = EnderecoForm(instance=usuario.curriculo.endereco)
-        return render(request, 'curriculo/endereco_form.html', {
+        return render(request, 'curriculo/generic_form.html', {
             'form': form,
+            'title': "Adicionar Endereço"
         })

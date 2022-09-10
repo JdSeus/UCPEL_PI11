@@ -1,7 +1,7 @@
 <form hx-post="{{ request.path }}" class="block p-[16px] bg-slate-300  m-auto">
     {% csrf_token %}
     <div class="font-bold mb-[20px] text-center">
-        Adicionar Endereço
+        {{ title }}
     </div>
     <div class="pi-form">
       {{ form.as_p }}
