@@ -9,6 +9,7 @@ from ..forms import EnderecoForm
 
 from ..models import Usuario
 from ..models import Curriculo
+from ..models import Endereco
 
 from ..helpers import dd
 
@@ -47,12 +48,29 @@ class CurriculoController():
         if request.method == "POST":
             form = EnderecoForm(request.POST)
             if form.is_valid():
+
+                if usuario.curriculo is None:
+                    curriculo = Curriculo()
+                    curriculo.save()
+                    usuario.curriculo = curriculo
+                    usuario.save()
+                
+                if usuario.curriculo.endereco is None:
+                    endereco = Endereco.objects.create(form.cleaned_data)
+                    usuario.curriculo.endereco = endereco
+                    usuario.curriculo.save()
+                else:
+                    endereco = Endereco.objects.filter(id=usuario.curriculo.endereco.id).update(**form.cleaned_data)
+
                 return HttpResponse(status=204, headers={'HX-Trigger': 'enderecoListChanged'})
         else:
             if usuario.curriculo is None:
                 form = EnderecoForm()
             else:
-                form = EnderecoForm()
+                if usuario.curriculo.endereco is None:
+                    form = EnderecoForm()
+                else:
+                    form = EnderecoForm(instance=usuario.curriculo.endereco)
         return render(request, 'curriculo/endereco_form.html', {
             'form': form,
         })

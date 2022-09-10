@@ -2,7 +2,6 @@
 
 {%block conteudo%}
 
-
 <div class="min-h-[calc(100vh-90px-20vh)] flex items-center">
     <div class="block p-[16px] bg-slate-300  m-auto">
 
@@ -36,4 +35,18 @@
     </div> 
 </div>
 
+{%endblock%}
+
+{%block scripts%}
+<script>
+    function reloadPage() {
+        window.location.href = window.location.pathname + window.location.search + window.location.hash;
+    }
+
+    htmx.on("enderecoListChanged", (e) => {
+        reloadPage();
+    });
+
+    
+</script>
 {%endblock%}
