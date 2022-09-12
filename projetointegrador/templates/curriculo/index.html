@@ -27,8 +27,14 @@
                     {{ usuario.curriculo.endereco.estado }}   
                 </div>
             </div>
-            <div class="cursor-pointer w-fit p-[5px] bg-green-300" hx-get="{% url 'ajax-adicionar-endereco' %}" hx-target="#js-dialog">
+            <div class="cursor-pointer w-fit p-[5px] bg-green-300" hx-get="{% url 'ajax-editar-endereco' %}" hx-target="#js-dialog">
                 Editar Endereco
+            </div>
+        </div>
+
+        <div class="mb-[10px]">
+            <div class="cursor-pointer w-fit p-[5px] bg-green-300" hx-get="{% url 'ajax-adicionar-telefone' %}" hx-target="#js-dialog">
+                Adicionar Telefone
             </div>
         </div>
 
@@ -44,6 +50,10 @@
     }
 
     htmx.on("enderecoListChanged", (e) => {
+        reloadPage();
+    });
+
+    htmx.on("telefoneListChanged", (e) => {
         reloadPage();
     });
 

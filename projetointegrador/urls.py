@@ -13,6 +13,6 @@ urlpatterns = [
     path('dashboard-empresa', views.dashboard_empresa, name='dashboard-empresa'),
     path('check-dashboard', views.check_dashboard, name='check-dashboard'),
     path('curriculo', views.curriculo, name='curriculo'),
-    path('ajax/add-movie', views.add_movie, name='add-movie'),
-    path('ajax/adicionar-endereco', views.ajax_adicionar_endereco, name='ajax-adicionar-endereco')
+    path('ajax/editar-endereco', views.ajax_editar_endereco, name='ajax-editar-endereco'),
+    path('ajax/adicionar-telefone', views.ajax_adicionar_telefone, name='ajax-adicionar-telefone')
 ]

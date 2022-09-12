@@ -44,16 +44,8 @@ def check_dashboard(request):
 def curriculo(request):
     return CurriculoController.index(request)
 
-def ajax_adicionar_endereco(request):
-    return CurriculoController.ajax_adicionar_endereco(request)
+def ajax_editar_endereco(request):
+    return CurriculoController.ajax_editar_endereco(request)
 
-def add_movie(request):
-    if request.method == "POST":
-        form = NameForm(request.POST)
-        if form.is_valid():
-            return HttpResponse(status=204, headers={'HX-Trigger': 'movieListChanged'})
-    else:
-        form = NameForm()
-    return render(request, 'movie_form.html', {
-        'form': form,
-    })
+def ajax_adicionar_telefone(request):
+    return CurriculoController.ajax_adicionar_telefone(request)
