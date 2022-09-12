@@ -59,7 +59,7 @@ class CurriculoController():
                     usuario.save()
                 
                 if usuario.curriculo.endereco is None:
-                    endereco = Endereco.objects.create(form.cleaned_data)
+                    endereco = Endereco.objects.create(**form.cleaned_data)
                     usuario.curriculo.endereco = endereco
                     usuario.curriculo.save()
                 else:
@@ -96,7 +96,7 @@ class CurriculoController():
                     usuario.curriculo = curriculo
                     usuario.save()
                 
-                telefone = Telefone.objects.create(form.cleaned_data)
+                telefone = Telefone.objects.create(**form.cleaned_data)
 
                 return HttpResponse(status=204, headers={'HX-Trigger': 'telefoneListChanged'})
         else:
