@@ -32,6 +32,19 @@
             </div>
         </div>
 
+        {% if usuario.curriculo.telefones.all.count > 0 %}
+        <div class="mb-[10px]">
+            <div class="font-bold">
+                Telefones:   
+            </div>
+                {% for telefone in usuario.curriculo.telefones.all %}        
+                    <div class="flex justify-center mb-[5px]">
+                        {{ telefone.telefone }}  
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         <div class="mb-[10px]">
             <div class="cursor-pointer w-fit p-[5px] bg-green-300" hx-get="{% url 'ajax-adicionar-telefone' %}" hx-target="#js-dialog">
                 Adicionar Telefone

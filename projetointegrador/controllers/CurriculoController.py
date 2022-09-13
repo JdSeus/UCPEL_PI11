@@ -27,7 +27,7 @@ class CurriculoController():
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def index(request):
 
-        usuario = Usuario.objects.get(id=request.user.id)
+        usuario = Usuario.objects.prefetch_related('curriculo', 'curriculo__telefones').get(id=request.user.id)
 
         if request.method == 'POST':
             form = CurriculoForm(request.POST)
@@ -38,6 +38,9 @@ class CurriculoController():
                 form = CurriculoForm()
             else:
                 form = CurriculoForm(instance=usuario.curriculo)
+
+        #dump_data = dd(request, usuario.curriculo.telefones.all())
+        #return HttpResponse(dump_data)
 
         return render(request, 'curriculo/index.html', {'form': form, 'usuario': usuario})
 
@@ -97,6 +100,8 @@ class CurriculoController():
                     usuario.save()
                 
                 telefone = Telefone.objects.create(**form.cleaned_data)
+                usuario.curriculo.telefones.add(telefone)
+                usuario.curriculo.save()
 
                 return HttpResponse(status=204, headers={'HX-Trigger': 'telefoneListChanged'})
         else:
