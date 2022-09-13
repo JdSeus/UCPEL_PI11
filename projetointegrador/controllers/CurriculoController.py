@@ -132,7 +132,8 @@ class CurriculoController():
             return HttpResponseForbidden()
 
         if request.method == "POST":
-            pass
+            Telefone.objects.filter(id=auxtelefone.id).delete()
+            return HttpResponse(status=204, headers={'HX-Trigger': 'telefoneListChanged'})
 
         return render(request, 'curriculo/generic_form.html', {
             'title': "Deseja remover este telefone?",
