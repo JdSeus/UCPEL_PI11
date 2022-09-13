@@ -50,7 +50,7 @@
                             {{ telefone.telefone }}  
                         </div>
                         <div class="flex justify-between items-center">
-                            <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-remover-telefone' telefone.id %}" hx-target="#js-dialog">
+                            <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-editar-telefone' telefone.id %}" hx-target="#js-dialog">
                                 {% include "pencil.html" %}
                             </div>
                             <div class="cursor-pointer bg-red-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-remover-telefone' telefone.id %}" hx-target="#js-dialog">

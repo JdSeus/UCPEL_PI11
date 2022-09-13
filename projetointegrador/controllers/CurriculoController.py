@@ -139,3 +139,37 @@ class CurriculoController():
             'title': "Deseja remover este telefone?",
             'label': "Telefone: " + auxtelefone.telefone 
         })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_editar_telefone(request, telefone_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        telefones = usuario.curriculo.telefones.all()
+
+        userHasTelefone = False
+        auxtelefone = None
+
+        for telefone in telefones:
+            if telefone.id == telefone_id:
+                userHasTelefone = True
+                auxtelefone = telefone
+                break
+
+        if userHasTelefone == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            form = TelefoneForm(request.POST)
+            if form.is_valid():
+
+                telefone = Telefone.objects.filter(id=auxtelefone.id).update(**form.cleaned_data)
+
+                return HttpResponse(status=204, headers={'HX-Trigger': 'telefoneListChanged'})
+        else:
+            form = TelefoneForm(instance=auxtelefone)
+
+        return render(request, 'curriculo/generic_form.html', {
+            'title': "Editar Telefone: ",
+            'form': form
+        })

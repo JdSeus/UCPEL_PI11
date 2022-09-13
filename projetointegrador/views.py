@@ -50,5 +50,8 @@ def ajax_editar_endereco(request):
 def ajax_adicionar_telefone(request):
     return CurriculoController.ajax_adicionar_telefone(request)
 
+def ajax_editar_telefone(request, telefone_id):
+    return CurriculoController.ajax_editar_telefone(request, telefone_id)
+
 def ajax_remover_telefone(request, telefone_id):
     return CurriculoController.ajax_remover_telefone(request, telefone_id)
