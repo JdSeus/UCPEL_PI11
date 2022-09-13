@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
+from django.http import HttpResponseForbidden
 
 from ..forms import CurriculoForm
 from ..forms import EnderecoForm
@@ -112,13 +113,28 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
-    def ajax_remover_telefone(request):
+    def ajax_remover_telefone(request, telefone_id):
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        telefones = usuario.curriculo.telefones.all()
+
+        userHasTelefone = False
+        auxtelefone = None
+
+        for telefone in telefones:
+            if telefone.id == telefone_id:
+                userHasTelefone = True
+                auxtelefone = telefone
+                break
+
+        if userHasTelefone == False:
+            return HttpResponseForbidden()
 
         if request.method == "POST":
             pass
 
         return render(request, 'curriculo/generic_form.html', {
-            'title': "Deseja remover este telefone?"
+            'title': "Deseja remover este telefone?",
+            'label': "Telefone: " + auxtelefone.telefone 
         })
