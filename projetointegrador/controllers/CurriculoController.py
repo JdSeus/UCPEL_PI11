@@ -110,3 +110,15 @@ class CurriculoController():
             'form': form,
             'title': "Adicionar Telefone"
         })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_remover_telefone(request):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        if request.method == "POST":
+            pass
+
+        return render(request, 'curriculo/generic_form.html', {
+            'title': "Deseja remover este telefone?"
+        })

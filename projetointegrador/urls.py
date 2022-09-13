@@ -14,5 +14,6 @@ urlpatterns = [
     path('check-dashboard', views.check_dashboard, name='check-dashboard'),
     path('curriculo', views.curriculo, name='curriculo'),
     path('ajax/editar-endereco', views.ajax_editar_endereco, name='ajax-editar-endereco'),
-    path('ajax/adicionar-telefone', views.ajax_adicionar_telefone, name='ajax-adicionar-telefone')
+    path('ajax/adicionar-telefone', views.ajax_adicionar_telefone, name='ajax-adicionar-telefone'),
+    path('ajax/remover-telefone', views.ajax_remover_telefone, name='ajax-remover-telefone')
 ]

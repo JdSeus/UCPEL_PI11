@@ -38,8 +38,13 @@
                 Telefones:   
             </div>
                 {% for telefone in usuario.curriculo.telefones.all %}        
-                    <div class="flex justify-center mb-[5px]">
-                        {{ telefone.telefone }}  
+                    <div class="flex justify-between mb-[5px]">
+                        <div>
+                            {{ telefone.telefone }}  
+                        </div>
+                        <div class="cursor-pointer bg-red-600 rounded text-white leading-none p-[5px]" hx-get="{% url 'ajax-remover-telefone' %}" hx-target="#js-dialog">
+                            &#10005;
+                        </div>
                     </div>
                 {% endfor %}
             </div>
