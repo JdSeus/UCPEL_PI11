@@ -10,6 +10,8 @@ from .models import Link
 from .models import Escolaridade
 from .models import Curso
 
+from .models import Vaga
+
 class DateInput(forms.DateInput):
     input_type = 'date'
 
@@ -53,3 +55,8 @@ class CursoForm(ModelForm):
             'inicio': DateInput(),
             'fim': DateInput(),
         }
+
+class VagaForm(ModelForm):
+    class Meta:
+        model = Vaga
+        exclude = ['publicar', 'concluida']

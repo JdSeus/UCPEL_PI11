@@ -81,3 +81,6 @@ def ajax_remover_curso(request, curso_id):
 
 def my_vagas(request):
     return MyVagasController.index(request)
+
+def ajax_adicionar_vaga(request):
+    return MyVagasController.ajax_adicionar_vaga(request)

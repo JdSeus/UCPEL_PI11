@@ -15,6 +15,32 @@
             Minhas Vagas
         </div>
 
+
+        {% if empresa.vagas.all.count > 0 %}
+        <div class="mb-[10px]">
+            {% for vaga in empresa.vagas.all %}        
+                <div class="flex justify-between mb-[5px]">
+                    <div>
+                        {{ vaga.titulo }}  
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="mb-[10px]">
+            <div class="text-white cursor-pointer w-fit p-[5px] bg-green-600" hx-get="{% url 'ajax-adicionar-vaga' %}" hx-target="#js-dialog">
+                <div class="flex">
+                    <div>
+                        Adicionar Vaga
+                    </div>
+                    <div class="bg-green-600 rounded text-white leading-none p-[5px] ml-[5px]">
+                        {% include "plus.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div> 
 </div>
 
@@ -26,6 +52,10 @@
     function reloadPage() {
         window.location.href = window.location.pathname + window.location.search + window.location.hash;
     }
+
+    htmx.on("vagaListChanged", (e) => {
+        reloadPage();
+    });
     
 </script>
 {%endblock%}

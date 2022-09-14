@@ -82,7 +82,8 @@ class Vaga(models.Model):
 class Empresa(AbstractBaseUser):
     cnpj = models.CharField(max_length=255, unique=True)
     nome_social = models.CharField(max_length=255)
-    categoria = models.ManyToManyField(Vaga, blank=True)
+
+    vagas = models.ManyToManyField(Vaga, blank=True)
 
     USERNAME_FIELD = 'cnpj'
 
