@@ -7,11 +7,6 @@ from .controllers.CheckDashboardController import CheckDashboardController
 from .controllers.CurriculoController import CurriculoController
 from .controllers.MyVagasController import MyVagasController
 
-from .forms import NameForm
-
-from django.shortcuts import render
-from django.http import HttpResponse
-
 def index(request):
     return HomeController.index(request)
 

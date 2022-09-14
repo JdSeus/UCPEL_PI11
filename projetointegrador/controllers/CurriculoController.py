@@ -69,7 +69,7 @@ class CurriculoController():
                     form = EnderecoForm()
                 else:
                     form = EnderecoForm(instance=usuario.curriculo.endereco)
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'form': form,
             'title': "Adicionar Endereço"
         })
@@ -96,7 +96,7 @@ class CurriculoController():
                 return HttpResponse(status=204, headers={'HX-Trigger': 'telefoneListChanged'})
         else:
             form = TelefoneForm()
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'form': form,
             'title': "Adicionar Telefone"
         })
@@ -130,7 +130,7 @@ class CurriculoController():
         else:
             form = TelefoneForm(instance=auxtelefone)
 
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'title': "Editar Telefone: ",
             'form': form
         })
@@ -158,7 +158,7 @@ class CurriculoController():
             Telefone.objects.filter(id=auxtelefone.id).delete()
             return HttpResponse(status=204, headers={'HX-Trigger': 'telefoneListChanged'})
 
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'title': "Deseja remover este telefone?",
             'label': "Telefone: " + auxtelefone.telefone 
         })
@@ -185,7 +185,7 @@ class CurriculoController():
                 return HttpResponse(status=204, headers={'HX-Trigger': 'linkListChanged'})
         else:
             form = LinkForm()
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'form': form,
             'title': "Adicionar Link"
         })
@@ -219,7 +219,7 @@ class CurriculoController():
         else:
             form = LinkForm(instance=auxlink)
 
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'title': "Editar Link: ",
             'form': form
         })
@@ -247,7 +247,7 @@ class CurriculoController():
             Link.objects.filter(id=auxlink.id).delete()
             return HttpResponse(status=204, headers={'HX-Trigger': 'linkListChanged'})
 
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'title': "Deseja remover este link?",
             'label': "Link: " + auxlink.titulo 
         })
@@ -275,7 +275,7 @@ class CurriculoController():
                 return HttpResponse(status=204, headers={'HX-Trigger': 'escolaridadeListChanged'})
         else:
             form = EscolaridadeForm()
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'form': form,
             'title': "Adicionar Escolaridade"
         })
@@ -309,7 +309,7 @@ class CurriculoController():
         else:
             form = EscolaridadeForm(instance=auxescolaridade)
 
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'title': "Editar Escolaridade: ",
             'form': form
         })
@@ -337,7 +337,7 @@ class CurriculoController():
             Escolaridade.objects.filter(id=auxescolaridade.id).delete()
             return HttpResponse(status=204, headers={'HX-Trigger': 'escolaridadeListChanged'})
 
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'title': "Deseja remover esta escolaridade?",
             'label': "Curso: " + auxescolaridade.curso 
         })
@@ -365,7 +365,7 @@ class CurriculoController():
                 return HttpResponse(status=204, headers={'HX-Trigger': 'cursoListChanged'})
         else:
             form = CursoForm()
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'form': form,
             'title': "Adicionar Curso"
         })
@@ -400,7 +400,7 @@ class CurriculoController():
         else:
             form = CursoForm(instance=auxcurso)
 
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'title': "Editar Curso: ",
             'form': form
         })
@@ -428,7 +428,7 @@ class CurriculoController():
             Curso.objects.filter(id=auxcurso.id).delete()
             return HttpResponse(status=204, headers={'HX-Trigger': 'cursoListChanged'})
 
-        return render(request, 'curriculo/generic_form.html', {
+        return render(request, 'generic_form.html', {
             'title': "Deseja remover este curso?",
             'label': "Curso: " + auxcurso.titulo 
         })
