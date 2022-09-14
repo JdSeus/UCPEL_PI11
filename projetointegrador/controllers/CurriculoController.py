@@ -287,3 +287,37 @@ class CurriculoController():
             'form': form,
             'title': "Adicionar Escolaridade"
         })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_editar_escolaridade(request, escolaridade_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        escolaridades = usuario.curriculo.escolaridades.all()
+
+        userHasEscolaridade = False
+        auxescolaridade = None
+
+        for escolaridade in escolaridades:
+            if escolaridade.id == escolaridade_id:
+                userHasEscolaridade = True
+                auxescolaridade = escolaridade
+                break
+
+        if userHasEscolaridade == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            form = EscolaridadeForm(request.POST)
+            if form.is_valid():
+
+                escolaridade = Escolaridade.objects.filter(id=auxescolaridade.id).update(**form.cleaned_data)
+
+                return HttpResponse(status=204, headers={'HX-Trigger': 'escolaridadeListChanged'})
+        else:
+            form = EscolaridadeForm(instance=auxescolaridade)
+
+        return render(request, 'curriculo/generic_form.html', {
+            'title': "Editar Escolaridade: ",
+            'form': form
+        })
