@@ -379,3 +379,38 @@ class CurriculoController():
             'form': form,
             'title': "Adicionar Curso"
         })
+
+    
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_editar_curso(request, curso_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        cursos = usuario.curriculo.cursos.all()
+
+        userHasCurso = False
+        auxcurso = None
+
+        for curso in cursos:
+            if curso.id == curso_id:
+                userHasCurso = True
+                auxcurso = curso
+                break
+
+        if userHasCurso == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            form = CursoForm(request.POST)
+            if form.is_valid():
+
+                curso = Curso.objects.filter(id=auxcurso.id).update(**form.cleaned_data)
+
+                return HttpResponse(status=204, headers={'HX-Trigger': 'cursoListChanged'})
+        else:
+            form = CursoForm(instance=auxcurso)
+
+        return render(request, 'curriculo/generic_form.html', {
+            'title': "Editar Curso: ",
+            'form': form
+        })
