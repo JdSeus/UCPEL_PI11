@@ -414,3 +414,31 @@ class CurriculoController():
             'title': "Editar Curso: ",
             'form': form
         })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_remover_curso(request, curso_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        cursos = usuario.curriculo.cursos.all()
+
+        userHasCurso = False
+        auxcurso = None
+
+        for curso in cursos:
+            if curso.id == curso_id:
+                userHasCurso = True
+                auxcurso = curso
+                break
+
+        if userHasCurso == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            Curso.objects.filter(id=auxcurso.id).delete()
+            return HttpResponse(status=204, headers={'HX-Trigger': 'cursoListChanged'})
+
+        return render(request, 'curriculo/generic_form.html', {
+            'title': "Deseja remover este curso?",
+            'label': "Curso: " + auxcurso.titulo 
+        })

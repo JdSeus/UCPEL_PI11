@@ -79,3 +79,6 @@ def ajax_adicionar_curso(request):
 
 def ajax_editar_curso(request, curso_id):
     return CurriculoController.ajax_editar_curso(request, curso_id)
+
+def ajax_remover_curso(request, curso_id):
+    return CurriculoController.ajax_remover_curso(request, curso_id)

@@ -170,6 +170,9 @@
                         <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-editar-curso' curso.id %}" hx-target="#js-dialog">
                             {% include "pencil.html" %}
                         </div>
+                        <div class="cursor-pointer bg-red-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-remover-curso' curso.id %}" hx-target="#js-dialog">
+                            &#10005;
+                        </div>
                     </div>
                 </div>
             {% endfor %}
