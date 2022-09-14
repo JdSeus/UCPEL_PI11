@@ -36,17 +36,7 @@ class CurriculoController():
 
         usuario = Usuario.objects.prefetch_related('curriculo', 'curriculo__telefones', 'curriculo__links').get(id=request.user.id)
 
-        if request.method == 'POST':
-            form = CurriculoForm(request.POST)
-            if form.is_valid():
-                return HttpResponseRedirect('/thanks/')
-        else:
-            if usuario.curriculo is None:
-                form = CurriculoForm()
-            else:
-                form = CurriculoForm(instance=usuario.curriculo)
-
-        return render(request, 'curriculo/index.html', {'form': form, 'usuario': usuario})
+        return render(request, 'curriculo/index.html', {'usuario': usuario})
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_editar_endereco(request):

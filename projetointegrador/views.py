@@ -5,6 +5,7 @@ from .controllers.DashboardUsuarioController import DashboardUsuarioController
 from .controllers.DashboardEmpresaController import DashboardEmpresaController
 from .controllers.CheckDashboardController import CheckDashboardController
 from .controllers.CurriculoController import CurriculoController
+from .controllers.MyVagasController import MyVagasController
 
 from .forms import NameForm
 
@@ -82,3 +83,6 @@ def ajax_editar_curso(request, curso_id):
 
 def ajax_remover_curso(request, curso_id):
     return CurriculoController.ajax_remover_curso(request, curso_id)
+
+def my_vagas(request):
+    return MyVagasController.index(request)

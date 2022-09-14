@@ -26,4 +26,5 @@ urlpatterns = [
     path('ajax/adicionar-curso', views.ajax_adicionar_curso, name='ajax-adicionar-curso'),
     path('ajax/editar-curso/<int:curso_id>', views.ajax_editar_curso, name='ajax-editar-curso'),
     path('ajax/remover-curso/<int:curso_id>', views.ajax_remover_curso, name='ajax-remover-curso'),
+    path('minhas-vagas', views.my_vagas, name='minhas-vagas'),
 ]
