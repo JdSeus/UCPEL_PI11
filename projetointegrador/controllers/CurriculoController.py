@@ -42,12 +42,7 @@ class CurriculoController():
             else:
                 form = CurriculoForm(instance=usuario.curriculo)
 
-        #dump_data = dd(request, usuario.curriculo.telefones.all())
-        #return HttpResponse(dump_data)
-
         return render(request, 'curriculo/index.html', {'form': form, 'usuario': usuario})
-
-
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_editar_endereco(request):
@@ -84,8 +79,6 @@ class CurriculoController():
             'form': form,
             'title': "Adicionar Endereço"
         })
-
-
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_adicionar_telefone(request):
@@ -201,4 +194,32 @@ class CurriculoController():
         return render(request, 'curriculo/generic_form.html', {
             'form': form,
             'title': "Adicionar Link"
+        })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_remover_link(request, link_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        links = usuario.curriculo.links.all()
+
+        userHasLink = False
+        auxlink = None
+
+        for link in links:
+            if link.id == link_id:
+                userHasLink = True
+                auxlink = link
+                break
+
+        if userHasLink == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            Link.objects.filter(id=auxlink.id).delete()
+            return HttpResponse(status=204, headers={'HX-Trigger': 'linkListChanged'})
+
+        return render(request, 'curriculo/generic_form.html', {
+            'title': "Deseja remover este link?",
+            'label': "Link: " + auxlink.titulo 
         })
