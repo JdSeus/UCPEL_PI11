@@ -154,6 +154,35 @@
         </div>
 
 
+        <div>
+            <div class="font-bold">
+                Cursos:   
+            </div>
+        </div>
+        {% if usuario.curriculo.cursos.all.count > 0 %}
+        <div class="mb-[10px]">
+            {% for curso in usuario.curriculo.cursos.all %}        
+                <div class="flex justify-between mb-[5px]">
+                    <div>
+                        {{ curso.titulo }}  
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="mb-[10px]">
+            <div class="text-white cursor-pointer w-fit p-[5px] bg-green-600" hx-get="{% url 'ajax-adicionar-curso' %}" hx-target="#js-dialog">
+                <div class="flex">
+                    <div>
+                        Adicionar Curso
+                    </div>
+                    <div class="bg-green-600 rounded text-white leading-none p-[5px] ml-[5px]">
+                        {% include "plus.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div> 
 </div>
@@ -179,6 +208,10 @@
     });
 
     htmx.on("escolaridadeListChanged", (e) => {
+        reloadPage();
+    });
+
+    htmx.on("cursoListChanged", (e) => {
         reloadPage();
     });
     

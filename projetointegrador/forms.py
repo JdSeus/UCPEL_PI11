@@ -8,6 +8,7 @@ from .models import Endereco
 from .models import Telefone
 from .models import Link
 from .models import Escolaridade
+from .models import Curso
 
 class DateInput(forms.DateInput):
     input_type = 'date'
@@ -38,6 +39,15 @@ class LinkForm(ModelForm):
 class EscolaridadeForm(ModelForm):
     class Meta:
         model = Escolaridade
+        exclude = []
+        widgets = {
+            'inicio': DateInput(),
+            'fim': DateInput(),
+        }
+
+class CursoForm(ModelForm):
+    class Meta:
+        model = Curso
         exclude = []
         widgets = {
             'inicio': DateInput(),

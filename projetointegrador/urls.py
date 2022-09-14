@@ -22,5 +22,6 @@ urlpatterns = [
     path('ajax/remover-link/<int:link_id>', views.ajax_remover_link, name='ajax-remover-link'),
     path('ajax/adicionar-escolaridade', views.ajax_adicionar_escolaridade, name='ajax-adicionar-escolaridade'),
     path('ajax/editar-escolaridade/<int:escolaridade_id>', views.ajax_editar_escolaridade, name='ajax-editar-escolaridade'),
-    path('ajax/remover-escolaridade/<int:escolaridade_id>', views.ajax_remover_escolaridade, name='ajax-remover-escolaridade')
+    path('ajax/remover-escolaridade/<int:escolaridade_id>', views.ajax_remover_escolaridade, name='ajax-remover-escolaridade'),
+    path('ajax/adicionar-curso', views.ajax_adicionar_curso, name='ajax-adicionar-curso'),
 ]

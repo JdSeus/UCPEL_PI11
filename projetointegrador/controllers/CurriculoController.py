@@ -10,6 +10,7 @@ from ..forms import EnderecoForm
 from ..forms import TelefoneForm
 from ..forms import LinkForm
 from ..forms import EscolaridadeForm
+from ..forms import CursoForm
 
 from ..models import Usuario
 from ..models import Curriculo
@@ -17,6 +18,7 @@ from ..models import Endereco
 from ..models import Telefone
 from ..models import Link
 from ..models import Escolaridade
+from ..models import Curso
 
 from ..helpers import dd
 
@@ -348,4 +350,32 @@ class CurriculoController():
         return render(request, 'curriculo/generic_form.html', {
             'title': "Deseja remover esta escolaridade?",
             'label': "Curso: " + auxescolaridade.curso 
+        })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_adicionar_curso(request):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        if request.method == "POST":
+            form = CursoForm(request.POST)
+            if form.is_valid():
+
+                if usuario.curriculo is None:
+                    curriculo = Curriculo()
+                    curriculo.save()
+                    usuario.curriculo = curriculo
+                    usuario.save()
+                
+                curso = Curso.objects.create(**form.cleaned_data)
+
+                usuario.curriculo.cursos.add(curso)
+                usuario.curriculo.save()
+
+                return HttpResponse(status=204, headers={'HX-Trigger': 'cursoListChanged'})
+        else:
+            form = CursoForm()
+        return render(request, 'curriculo/generic_form.html', {
+            'form': form,
+            'title': "Adicionar Curso"
         })
