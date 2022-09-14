@@ -115,6 +115,36 @@
             </div>
         </div>
 
+        <div>
+            <div class="font-bold">
+                Escolaridade:   
+            </div>
+        </div>
+        {% if usuario.curriculo.escolaridades.all.count > 0 %}
+        <div class="mb-[10px]">
+            {% for escolaridade in usuario.curriculo.escolaridades.all %}        
+                <div class="flex justify-between mb-[5px]">
+                    <div>
+                        {{ escolaridade.curso }}  
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="mb-[10px]">
+            <div class="text-white cursor-pointer w-fit p-[5px] bg-green-600" hx-get="{% url 'ajax-adicionar-escolaridade' %}" hx-target="#js-dialog">
+                <div class="flex">
+                    <div>
+                        Adicionar Escolaridade
+                    </div>
+                    <div class="bg-green-600 rounded text-white leading-none p-[5px] ml-[5px]">
+                        {% include "plus.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
     </div> 
@@ -140,6 +170,9 @@
         reloadPage();
     });
 
+    htmx.on("escolaridadeListChanged", (e) => {
+        reloadPage();
+    });
     
 </script>
 {%endblock%}

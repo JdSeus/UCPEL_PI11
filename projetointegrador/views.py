@@ -64,3 +64,6 @@ def ajax_editar_link(request, link_id):
 
 def ajax_remover_link(request, link_id):
     return CurriculoController.ajax_remover_link(request, link_id)
+
+def ajax_adicionar_escolaridade(request):
+    return CurriculoController.ajax_adicionar_escolaridade(request)

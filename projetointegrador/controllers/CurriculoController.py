@@ -9,12 +9,14 @@ from ..forms import CurriculoForm
 from ..forms import EnderecoForm
 from ..forms import TelefoneForm
 from ..forms import LinkForm
+from ..forms import EscolaridadeForm
 
 from ..models import Usuario
 from ..models import Curriculo
 from ..models import Endereco
 from ..models import Telefone
 from ..models import Link
+from ..models import Escolaridade
 
 from ..helpers import dd
 
@@ -169,8 +171,6 @@ class CurriculoController():
             'label': "Telefone: " + auxtelefone.telefone 
         })
 
-
-
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_adicionar_link(request):
 
@@ -258,4 +258,32 @@ class CurriculoController():
         return render(request, 'curriculo/generic_form.html', {
             'title': "Deseja remover este link?",
             'label': "Link: " + auxlink.titulo 
+        })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_adicionar_escolaridade(request):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        if request.method == "POST":
+            form = EscolaridadeForm(request.POST)
+            if form.is_valid():
+
+                if usuario.curriculo is None:
+                    curriculo = Curriculo()
+                    curriculo.save()
+                    usuario.curriculo = curriculo
+                    usuario.save()
+                
+                escolaridade = Escolaridade.objects.create(**form.cleaned_data)
+
+                usuario.curriculo.escolaridades.add(escolaridade)
+                usuario.curriculo.save()
+
+                return HttpResponse(status=204, headers={'HX-Trigger': 'escolaridadeListChanged'})
+        else:
+            form = EscolaridadeForm()
+        return render(request, 'curriculo/generic_form.html', {
+            'form': form,
+            'title': "Adicionar Escolaridade"
         })
