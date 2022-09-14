@@ -87,9 +87,12 @@
             {% for link in usuario.curriculo.links.all %}        
                 <div class="flex justify-between mb-[5px]">
                     <div>
-                        <a class="text-blue-500" href="{{ link.link }}">{{ link.titulo }}</a> 
+                        <a class="text-blue-500" href="{{ link.link }}" target="_blank">{{ link.titulo }}</a> 
                     </div>
                     <div class="flex justify-between items-center">
+                        <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-editar-link' link.id %}" hx-target="#js-dialog">
+                            {% include "pencil.html" %}
+                        </div>
                         <div class="cursor-pointer bg-red-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-remover-link' link.id %}" hx-target="#js-dialog">
                             &#10005;
                         </div>

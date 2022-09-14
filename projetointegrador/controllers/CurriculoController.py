@@ -108,34 +108,6 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
-    def ajax_remover_telefone(request, telefone_id):
-
-        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
-
-        telefones = usuario.curriculo.telefones.all()
-
-        userHasTelefone = False
-        auxtelefone = None
-
-        for telefone in telefones:
-            if telefone.id == telefone_id:
-                userHasTelefone = True
-                auxtelefone = telefone
-                break
-
-        if userHasTelefone == False:
-            return HttpResponseForbidden()
-
-        if request.method == "POST":
-            Telefone.objects.filter(id=auxtelefone.id).delete()
-            return HttpResponse(status=204, headers={'HX-Trigger': 'telefoneListChanged'})
-
-        return render(request, 'curriculo/generic_form.html', {
-            'title': "Deseja remover este telefone?",
-            'label': "Telefone: " + auxtelefone.telefone 
-        })
-
-    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_editar_telefone(request, telefone_id):
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
@@ -170,6 +142,36 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_remover_telefone(request, telefone_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        telefones = usuario.curriculo.telefones.all()
+
+        userHasTelefone = False
+        auxtelefone = None
+
+        for telefone in telefones:
+            if telefone.id == telefone_id:
+                userHasTelefone = True
+                auxtelefone = telefone
+                break
+
+        if userHasTelefone == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            Telefone.objects.filter(id=auxtelefone.id).delete()
+            return HttpResponse(status=204, headers={'HX-Trigger': 'telefoneListChanged'})
+
+        return render(request, 'curriculo/generic_form.html', {
+            'title': "Deseja remover este telefone?",
+            'label': "Telefone: " + auxtelefone.telefone 
+        })
+
+
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_adicionar_link(request):
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
@@ -194,6 +196,40 @@ class CurriculoController():
         return render(request, 'curriculo/generic_form.html', {
             'form': form,
             'title': "Adicionar Link"
+        })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_editar_link(request, link_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        links = usuario.curriculo.links.all()
+
+        userHasLink = False
+        auxlink = None
+
+        for link in links:
+            if link.id == link_id:
+                userHasLink = True
+                auxlink = link
+                break
+
+        if userHasLink == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            form = LinkForm(request.POST)
+            if form.is_valid():
+
+                link = Link.objects.filter(id=auxlink.id).update(**form.cleaned_data)
+
+                return HttpResponse(status=204, headers={'HX-Trigger': 'linkListChanged'})
+        else:
+            form = LinkForm(instance=auxlink)
+
+        return render(request, 'curriculo/generic_form.html', {
+            'title': "Editar Link: ",
+            'form': form
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")

@@ -18,5 +18,6 @@ urlpatterns = [
     path('ajax/editar-telefone/<int:telefone_id>', views.ajax_editar_telefone, name='ajax-editar-telefone'),
     path('ajax/remover-telefone/<int:telefone_id>', views.ajax_remover_telefone, name='ajax-remover-telefone'),
     path('ajax/adicionar-link', views.ajax_adicionar_link, name='ajax-adicionar-link'),
+    path('ajax/editar-link/<int:link_id>', views.ajax_editar_link, name='ajax-editar-link'),
     path('ajax/remover-link/<int:link_id>', views.ajax_remover_link, name='ajax-remover-link')
 ]
