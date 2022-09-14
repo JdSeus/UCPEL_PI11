@@ -9,12 +9,21 @@ class Endereco(models.Model):
     cidade = models.CharField(max_length=255, blank=True)
     estado = models.CharField(max_length=255, blank=True)
 
+    def __str__(self):
+        return self.rua
+
 class Telefone(models.Model):
     telefone = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.telefone
 
 class Link(models.Model):
     titulo = models.CharField(max_length=255)
     link = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.titulo
 
 class Escolaridade(models.Model):
     instituicao = models.CharField(max_length=255)
@@ -22,6 +31,9 @@ class Escolaridade(models.Model):
     observacao = models.CharField(max_length=1023)
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
+
+    def __str__(self):
+        return self.curso
     
 class Historico(models.Model):
     empresa = models.CharField(max_length=255)
@@ -30,12 +42,18 @@ class Historico(models.Model):
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
 
+    def __str__(self):
+        return self.cargo
+
 class Curso(models.Model):
     instituicao = models.CharField(max_length=255)
     titulo = models.CharField(max_length=255)
     descricao = models.CharField(max_length=1023)
     inicio = models.DateTimeField()
     fim = models.DateTimeField()
+
+    def __str__(self):
+        return self.titulo
     
 class Curriculo(models.Model):
     endereco = models.ForeignKey(Endereco, on_delete=models.CASCADE, blank=True, null=True)
@@ -73,12 +91,18 @@ class Usuario(AbstractBaseUser):
 class CategoriaVaga(models.Model):
     titulo = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.titulo
+
 class Vaga(models.Model):
     titulo = models.CharField(max_length=255)
     descricao = models.CharField(max_length=1023)
     concluida = models.BooleanField()
     publicar = models.BooleanField()
     categoria = models.ManyToManyField(CategoriaVaga, blank=True)
+
+    def __str__(self):
+        return self.titulo
 class Empresa(AbstractBaseUser):
     cnpj = models.CharField(max_length=255, unique=True)
     nome_social = models.CharField(max_length=255)
