@@ -70,3 +70,6 @@ def ajax_adicionar_escolaridade(request):
 
 def ajax_editar_escolaridade(request, escolaridade_id):
     return CurriculoController.ajax_editar_escolaridade(request, escolaridade_id)
+
+def ajax_remover_escolaridade(request, escolaridade_id):
+    return CurriculoController.ajax_remover_escolaridade(request, escolaridade_id)

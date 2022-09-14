@@ -321,3 +321,31 @@ class CurriculoController():
             'title': "Editar Escolaridade: ",
             'form': form
         })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_remover_escolaridade(request, escolaridade_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        escolaridades = usuario.curriculo.escolaridades.all()
+
+        userHasEscolaridade = False
+        auxescolaridade = None
+
+        for escolaridade in escolaridades:
+            if escolaridade.id == escolaridade_id:
+                userHasEscolaridade = True
+                auxescolaridade = escolaridade
+                break
+
+        if userHasEscolaridade == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            Escolaridade.objects.filter(id=auxescolaridade.id).delete()
+            return HttpResponse(status=204, headers={'HX-Trigger': 'escolaridadeListChanged'})
+
+        return render(request, 'curriculo/generic_form.html', {
+            'title': "Deseja remover esta escolaridade?",
+            'label': "Curso: " + auxescolaridade.curso 
+        })
