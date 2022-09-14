@@ -55,3 +55,6 @@ def ajax_editar_telefone(request, telefone_id):
 
 def ajax_remover_telefone(request, telefone_id):
     return CurriculoController.ajax_remover_telefone(request, telefone_id)
+
+def ajax_adicionar_link(request):
+    return CurriculoController.ajax_adicionar_link(request)
