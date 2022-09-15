@@ -85,12 +85,14 @@ class MyVagasController():
                 
                 categorias = form.cleaned_data.get("categoria")
 
-                vaga_id = Vaga.objects.filter(id=auxvaga.id).update(titulo=titulo, descricao=descricao, concluida=concluida, publicar=publicar)
+                Vaga.objects.filter(id=auxvaga.id).update(titulo=titulo, descricao=descricao, concluida=concluida, publicar=publicar)
 
-                vaga = Vaga.objects.get(id=vaga_id)
+                vaga = Vaga.objects.get(id=auxvaga.id)
 
                 vaga.categoria.clear()
-                vaga.categoria.set(categorias)
+
+                for categoria in categorias:
+                    vaga.categoria.add(categoria)
 
                 vaga.save()
 
