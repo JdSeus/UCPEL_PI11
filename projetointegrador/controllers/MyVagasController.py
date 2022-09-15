@@ -104,3 +104,31 @@ class MyVagasController():
             'title': "Editar Vaga: ",
             'form': form
         })
+
+    @user_passes_test(Empresa.user_is_Empresa, login_url="login-empresa")
+    def ajax_remover_vaga(request, vaga_id):
+
+        empresa = Empresa.objects.get(id=request.user.id)
+
+        vagas = empresa.vagas.all()
+
+        userHasVagas = False
+        auxvaga = None
+
+        for vaga in vagas:
+            if vaga.id == vaga_id:
+                userHasVagas = True
+                auxvaga = vaga
+                break
+
+        if userHasVagas == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            Vaga.objects.filter(id=auxvaga.id).delete()
+            return HttpResponse(status=204, headers={'HX-Trigger': 'vagaListChanged'})
+
+        return render(request, 'generic_form.html', {
+            'title': "Deseja remover esta vaga?",
+            'label': "Vaga: " + auxvaga.titulo 
+        })
