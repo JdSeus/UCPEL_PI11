@@ -38,3 +38,7 @@
 .pi-form input {
   @apply block outline-none w-[100%] p-[5px] bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500
 }
+
+.pi-form select {
+  @apply block outline-none w-[100%] p-[5px] bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500
+}

@@ -7,6 +7,10 @@ from ..models import Vaga
 
 from ..forms import VagaForm
 
+from ..helpers import dd
+
+from pprint import pprint
+
 class MyVagasController():
 
     @user_passes_test(Empresa.user_is_Empresa, login_url="login-empresa")
@@ -25,10 +29,21 @@ class MyVagasController():
         if request.method == "POST":
             form = VagaForm(request.POST)
             if form.is_valid():
+
+                titulo = form.cleaned_data.get("titulo")
+                descricao = form.cleaned_data.get("descricao")
                 
-                vaga = Vaga.objects.create(**form.cleaned_data)
+                categorias = form.cleaned_data.get("categoria")
+
+                vaga = Vaga.objects.create(titulo=titulo, descricao=descricao, concluida=0, publicar=1)
+
+                for categoria in categorias:
+                    vaga.categoria.add(categoria)
+
+                vaga.save()
+
                 empresa.vagas.add(vaga)
-                empresa.vagas.save()
+                empresa.save()
 
                 return HttpResponse(status=204, headers={'HX-Trigger': 'vagaListChanged'})
         else:
