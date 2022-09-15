@@ -1,3 +1,4 @@
+from importlib.metadata import requires
 from django import forms
 from django.forms import ModelForm
 
@@ -60,3 +61,14 @@ class VagaForm(ModelForm):
     class Meta:
         model = Vaga
         exclude = ['publicar', 'concluida']
+        widgets = {
+            'categoria': forms.CheckboxSelectMultiple(),
+        }
+
+class VagaFormEdit(ModelForm):
+    class Meta:
+        model = Vaga
+        exclude = []
+        widgets = {
+            'categoria': forms.CheckboxSelectMultiple(),
+        }

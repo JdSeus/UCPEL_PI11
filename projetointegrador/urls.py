@@ -28,4 +28,5 @@ urlpatterns = [
     path('ajax/remover-curso/<int:curso_id>', views.ajax_remover_curso, name='ajax-remover-curso'),
     path('minhas-vagas', views.my_vagas, name='minhas-vagas'),
     path('ajax/adicionar-vaga', views.ajax_adicionar_vaga, name='ajax-adicionar-vaga'),
+    path('ajax/editar-vaga/<int:vaga_id>', views.ajax_editar_vaga, name='ajax-editar-vaga'),
 ]

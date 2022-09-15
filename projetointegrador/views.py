@@ -84,3 +84,6 @@ def my_vagas(request):
 
 def ajax_adicionar_vaga(request):
     return MyVagasController.ajax_adicionar_vaga(request)
+
+def ajax_editar_vaga(request, vaga_id):
+    return MyVagasController.ajax_editar_vaga(request, vaga_id)
