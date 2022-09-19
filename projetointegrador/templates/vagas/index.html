@@ -3,7 +3,7 @@
 {%block conteudo%}
 
 <div class="min-h-[calc(100vh-90px-20vh)] flex items-center">
-    <div class="block p-[16px] bg-slate-300 m-auto max-w-[600px]">
+    <div class="block p-[16px] bg-slate-300 m-auto max-w-[800px]">
 
         {% if vagas.all.count > 0 %}
             <table class="border-collapse table-fixed w-full bg-slate-100">
@@ -12,6 +12,8 @@
                         <th class="w-[50px] border border-solid border-[#000] font-medium p-4 text-center">ID</th>
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Título</th>
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Categorias</th>
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Visualizar</th>
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Apliquei?</th>
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Concluída</th>
                     </tr>
                 </thead>
@@ -33,6 +35,8 @@
                                 Sem Categoria
                             {% endif %}
                         </td>
+                        <td class="border border-solid border-[#000] p-4">Ver</td>
+                        <td class="border border-solid border-[#000] p-4">Não</td>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.concluida|yesno:"Sim,Não" }}</td>
                     </tr>
                     {% endfor %}

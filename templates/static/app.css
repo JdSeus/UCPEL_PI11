@@ -666,6 +666,10 @@ video {
   max-width: 600px;
 }
 
+.max-w-\[800px\] {
+  max-width: 800px;
+}
+
 .table-fixed {
   table-layout: fixed;
 }
