@@ -16,8 +16,8 @@ class VagasController():
     def index(request):
         vagas = Vaga.objects.filter(publicar=True)
 
-        dump_data = dd(request, vagas)
-        return HttpResponse(dump_data)
+        # dump_data = dd(request, vagas)
+        # return HttpResponse(dump_data)
 
         return render(request, 'vagas/index.html', {
             'vagas': vagas

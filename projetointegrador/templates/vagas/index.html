@@ -20,7 +20,19 @@
                     <tr>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.id }}</td>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.titulo }}</td>
-                        <td class="border border-solid border-[#000] p-4">{{ vaga.categorias }}</td>
+                        <td class="border border-solid border-[#000] p-4">
+                            {% if vaga.categoria.all.count > 0 %}
+                                {% for categoria in vaga.categoria.all %}  
+                                    {% if forloop.first %}
+                                        {{ categoria }}
+                                    {% else %}
+                                        , {{ categoria }}
+                                    {% endif %}
+                                {% endfor %} 
+                            {% else %}
+                                Sem Categoria
+                            {% endif %}
+                        </td>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.concluida|yesno:"Sim,Não" }}</td>
                     </tr>
                     {% endfor %}
