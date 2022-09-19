@@ -2,6 +2,36 @@
 
 {%block conteudo%}
 
-VAGAS
+<div class="min-h-[calc(100vh-90px-20vh)] flex items-center">
+    <div class="block p-[16px] bg-slate-300 m-auto max-w-[600px]">
+
+        {% if vagas.all.count > 0 %}
+            <table class="border-collapse table-fixed w-full bg-slate-100">
+                <thead>
+                    <tr class="border-[2px] border-solid border-[#000]">
+                        <th class="w-[50px] border border-solid border-[#000] font-medium p-4 text-center">ID</th>
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Título</th>
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Categorias</th>
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Concluída</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for vaga in vagas.all %}   
+                    <tr>
+                        <td class="border border-solid border-[#000] p-4">{{ vaga.id }}</td>
+                        <td class="border border-solid border-[#000] p-4">{{ vaga.titulo }}</td>
+                        <td class="border border-solid border-[#000] p-4">{{ vaga.categorias }}</td>
+                        <td class="border border-solid border-[#000] p-4">{{ vaga.concluida|yesno:"Sim,Não" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            SEM VAGAS DISPONÍVEIS
+        {% endif %}
+
+    </div> 
+</div>
+
 
 {%endblock%}

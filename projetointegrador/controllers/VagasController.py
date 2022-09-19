@@ -1,15 +1,24 @@
-from django.shortcuts import render, redirect
-from django.contrib import messages
-from django.contrib.auth import login as auth_login
-from django.contrib.auth import logout as auth_logout
-from django.contrib.auth.hashers import check_password
-from django.contrib.auth.hashers import make_password
-from django.core.validators import validate_email
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.http import HttpResponse
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponseForbidden
 
+from ..helpers import dd
 
-from ..models import Usuario
+from pprint import pprint
+
+from ..models import Vaga
 
 class VagasController():
 
     def index(request):
-        return render(request, 'vagas/index.html')
+        vagas = Vaga.objects.filter(publicar=True)
+
+        dump_data = dd(request, vagas)
+        return HttpResponse(dump_data)
+
+        return render(request, 'vagas/index.html', {
+            'vagas': vagas
+        })

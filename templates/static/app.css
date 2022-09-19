@@ -628,6 +628,10 @@ video {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
 .min-h-\[calc\(100vh-90px-20vh\)\] {
   min-height: calc(100vh - 90px - 20vh);
 }
@@ -644,6 +648,30 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[30px\] {
+  width: 30px;
+}
+
+.w-\[50px\] {
+  width: 50px;
+}
+
+.min-w-\[100px\] {
+  min-width: 100px;
+}
+
+.max-w-\[600px\] {
+  max-width: 600px;
+}
+
+.table-fixed {
+  table-layout: fixed;
+}
+
+.border-collapse {
+  border-collapse: collapse;
 }
 
 .translate-x-\[-50\%\] {
@@ -684,9 +712,45 @@ video {
   border-width: 1px;
 }
 
+.border-\[2px\] {
+  border-width: 2px;
+}
+
+.border-b {
+  border-bottom-width: 1px;
+}
+
+.border-b-\[2px\] {
+  border-bottom-width: 2px;
+}
+
+.border-solid {
+  border-style: solid;
+}
+
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
+}
+
+.border-slate-100 {
+  --tw-border-opacity: 1;
+  border-color: rgb(241 245 249 / var(--tw-border-opacity));
+}
+
+.border-\[\#000\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.border-b-black {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.border-b-\[\#000\] {
+  --tw-border-opacity: 1;
+  border-bottom-color: rgb(0 0 0 / var(--tw-border-opacity));
 }
 
 .bg-slate-300 {
@@ -724,12 +788,21 @@ video {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity));
+}
+
 .p-\[16px\] {
   padding: 16px;
 }
 
 .p-\[5px\] {
   padding: 5px;
+}
+
+.p-4 {
+  padding: 1rem;
 }
 
 .px-\[20px\] {
@@ -748,6 +821,22 @@ video {
 
 .pb-\[20px\] {
   padding-bottom: 20px;
+}
+
+.pt-0 {
+  padding-top: 0px;
+}
+
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+
+.pl-8 {
+  padding-left: 2rem;
+}
+
+.text-left {
+  text-align: left;
 }
 
 .text-center {
@@ -783,6 +872,10 @@ video {
   font-weight: 500;
 }
 
+.font-medium {
+  font-weight: 500;
+}
+
 .leading-\[1\] {
   line-height: 1;
 }
@@ -809,6 +902,11 @@ video {
 .text-gray-900 {
   --tw-text-opacity: 1;
   color: rgb(17 24 39 / var(--tw-text-opacity));
+}
+
+.text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
 }
 
 .outline-none {
