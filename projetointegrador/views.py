@@ -6,6 +6,7 @@ from .controllers.DashboardEmpresaController import DashboardEmpresaController
 from .controllers.CheckDashboardController import CheckDashboardController
 from .controllers.CurriculoController import CurriculoController
 from .controllers.MyVagasController import MyVagasController
+from .controllers.VagasController import VagasController
 
 def index(request):
     return HomeController.index(request)
@@ -90,3 +91,6 @@ def ajax_editar_vaga(request, vaga_id):
 
 def ajax_remover_vaga(request, vaga_id):
     return MyVagasController.ajax_remover_vaga(request, vaga_id)
+
+def vagas(request):
+    return VagasController.index(request)
