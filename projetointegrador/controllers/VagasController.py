@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseForbidden
 from django.http import HttpResponseNotFound
+from django.shortcuts import get_object_or_404
+
 
 from ..helpers import dd
 
@@ -25,9 +27,9 @@ class VagasController():
         })
 
     def vaga(request, vaga_id):
-        vaga = Vaga.objects.filter(publicar=True, id=vaga_id)
+        vaga = get_object_or_404(Vaga, id=vaga_id)
 
-        if vaga is None:
+        if vaga.publicar is False:
             return HttpResponseNotFound()     
 
         return render(request, 'vaga/index.html', {

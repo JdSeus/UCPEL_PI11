@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{%block conteudo%}
+
+<div class="min-h-[calc(100vh-90px-20vh)] flex items-center">
+    <div class="block p-[16px] bg-slate-300 m-auto max-w-[800px]">
+
+        <div class="font-bold mb-[20px] flex">
+            <a class="font-bold block hover:text-blue-800" href="{% url 'dashboard-usuario' %}">
+                Dashboard
+            </a>
+            <a class="font-bold block hover:text-blue-800 ml-[5px]" href="{% url 'vagas' %}">
+                Vagas
+            </a>
+        </div>
+
+        <div class="font-bold mb-[20px] text-center">
+            VAGA - {{ vaga.titulo }}
+        </div>
+
+        <div class="flex justify-left mb-[5px]">
+            <div class="font-bold">
+                Título: 
+            </div>
+            <div>
+                {{ vaga.titulo }}
+            </div>
+        </div>
+
+        <div class="flex justify-left mb-[5px]">
+            <div class="font-bold">
+                Categorias: 
+            </div>
+            <div class="ml-[5px]">
+                {% if vaga.categoria.all.count > 0 %}
+                    {% for categoria in vaga.categoria.all %}  
+                        {% if forloop.first %}
+                            {{ categoria }}
+                        {% else %}
+                            , {{ categoria }}
+                        {% endif %}
+                    {% endfor %} 
+                {% else %}
+                    Sem Categoria
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="flex justify-left mb-[5px]">
+            <div class="font-bold">
+                Descrição: 
+            </div>
+            <div class="ml-[5px]">
+                {{ vaga.descricao }}
+            </div>
+        </div>
+
+        <div class="flex justify-left mb-[5px]">
+            <div class="font-bold">
+                Concluída: 
+            </div>
+            <div class="ml-[5px]">
+                {{ vaga.concluida|yesno:"Sim,Não" }}
+            </div>
+        </div>
+
+    </div> 
+</div>
+
+
+{%endblock%}
