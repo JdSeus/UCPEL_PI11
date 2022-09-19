@@ -94,3 +94,6 @@ def ajax_remover_vaga(request, vaga_id):
 
 def vagas(request):
     return VagasController.index(request)
+
+def vaga(request, vaga_id):
+    return VagasController.vaga(request, vaga_id)

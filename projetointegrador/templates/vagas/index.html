@@ -5,6 +5,16 @@
 <div class="min-h-[calc(100vh-90px-20vh)] flex items-center">
     <div class="block p-[16px] bg-slate-300 m-auto max-w-[800px]">
 
+        <div class="font-bold mb-[20px]">
+            <a class="font-bold block hover:text-blue-800" href="{% url 'dashboard-usuario' %}">
+                Dashboard
+            </a>
+        </div>
+
+        <div class="font-bold mb-[20px] text-center">
+            VAGAS
+        </div>
+
         {% if vagas.all.count > 0 %}
             <table class="border-collapse table-fixed w-full bg-slate-100">
                 <thead>
@@ -35,7 +45,11 @@
                                 Sem Categoria
                             {% endif %}
                         </td>
-                        <td class="border border-solid border-[#000] p-4">Ver</td>
+                        <td class="border border-solid border-[#000] p-4">
+                            <a href="{% url 'vaga' vaga.id %}">
+                                Ver
+                            </a>
+                        </td>
                         <td class="border border-solid border-[#000] p-4">Não</td>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.concluida|yesno:"Sim,Não" }}</td>
                     </tr>
