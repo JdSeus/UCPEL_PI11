@@ -59,6 +59,18 @@
             APLICAÇÕES
         </div>
 
+        {% if usuarios %}
+            {% for usuario in usuarios %}   
+                <div>
+                    {{ usuario.nome }} {{ usuario.sobrenome }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div>
+                Não há aplicações para a vaga.
+            </div>
+        {% endif %}
+
     </div> 
 </div>
 

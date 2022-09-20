@@ -4,7 +4,9 @@ from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponse
 from django.http import HttpResponseForbidden
 
+from ..models import Aplicacao
 from ..models import Empresa
+from ..models import Usuario
 
 from ..helpers import dd
 
@@ -31,6 +33,17 @@ class AplicacaoController():
         if userHasVaga == False:
             return HttpResponseForbidden()
 
+        aplicacoes = Aplicacao.objects.prefetch_related('vagas', 'curriculos').filter(vagas__id=auxvaga.id)
+        
+        usuarios = []
+        for aplicacao in aplicacoes:
+            for curriculo in aplicacao.curriculos.all():
+                usuario = Usuario.objects.get(curriculo_id=curriculo.id)
+                if usuario is not None:
+                    usuarios.append(usuario)  
+
+
         return render(request, 'aplicacao/index.html', {
-            'vaga': auxvaga
+            'vaga': auxvaga,
+            'usuarios': usuarios,
         })
