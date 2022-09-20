@@ -67,9 +67,7 @@
         {% if aplicacao is None %}
             <a class="block m-auto w-fit p-4 bg-green-700 text-white rounded-[5em]" href="{% url 'aplicar-em-vaga' vaga.id %}">APLICAR</a>
         {% else %}
-            <div>
-                Aplicado
-            </div>
+            <a class="block m-auto w-fit p-4 bg-red-700 text-white rounded-[5em]" href="{% url 'desaplicar-em-vaga' vaga.id %}">DESAPLICAR</a>
         {% endif %}
 
     </div> 

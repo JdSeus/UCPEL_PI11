@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseNotFound
 from django.shortcuts import get_object_or_404
@@ -43,6 +44,7 @@ class VagasController():
             return HttpResponseNotFound()     
 
         aplicacao = Aplicacao.objects.filter(vagas__id=vaga_id, curriculos__id=usuario.curriculo.id)
+        aplicacao = aplicacao.first()
 
         return render(request, 'vaga/index.html', {
             'vaga': vaga,
@@ -66,11 +68,38 @@ class VagasController():
             usuario.save()
 
         aplicacao = Aplicacao.objects.filter(vagas__id=vaga_id, curriculos__id=usuario.curriculo.id)
+        aplicacao = aplicacao.first()
 
         if aplicacao is None:
             aplicacao = Aplicacao()
+            aplicacao.save()
             aplicacao.vagas.add(vaga)
             aplicacao.curriculos.add(usuario.curriculo)
             aplicacao.save()
 
+        return redirect('vaga', vaga.id)
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def desaplicar_em_vaga(request, vaga_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        vaga = get_object_or_404(Vaga, id=vaga_id)
+
+        if vaga.publicar is False:
+            return HttpResponseNotFound()
+
+        if usuario.curriculo is None:
+            curriculo = Curriculo()
+            curriculo.save()
+            usuario.curriculo = curriculo
+            usuario.save()   
+
+        aplicacao = Aplicacao.objects.filter(vagas__id=vaga_id, curriculos__id=usuario.curriculo.id)
+        aplicacao = aplicacao.first()
+
+        if aplicacao is None:
+            return redirect('vaga', vaga.id)
+
+        aplicacao.delete()
         return redirect('vaga', vaga.id)

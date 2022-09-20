@@ -100,3 +100,6 @@ def vaga(request, vaga_id):
 
 def aplicar_em_vaga(request, vaga_id):
     return VagasController.aplicar_em_vaga(request, vaga_id)
+
+def desaplicar_em_vaga(request, vaga_id):
+    return VagasController.desaplicar_em_vaga(request, vaga_id)
