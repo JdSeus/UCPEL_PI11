@@ -67,7 +67,40 @@
         {% if aplicacao is None %}
             <a class="block m-auto w-fit p-4 bg-green-700 text-white rounded-[5em]" href="{% url 'aplicar-em-vaga' vaga.id %}">APLICAR</a>
         {% else %}
-            <a class="block m-auto w-fit p-4 bg-red-700 text-white rounded-[5em]" href="{% url 'desaplicar-em-vaga' vaga.id %}">DESAPLICAR</a>
+            <a class="block m-auto w-fit p-4 bg-red-700 text-white rounded-[5em] mt-[20px]" href="{% url 'desaplicar-em-vaga' vaga.id %}">DESAPLICAR</a>
+        {% endif %}
+
+        {% if aplicacao is not None %}
+        <div class="font-bold mb-[20px] text-center mt-[20px]">
+            APLICAÇÃO:
+        </div>
+        <div class="flex justify-left mb-[5px]">
+            <div class="font-bold">
+                Status da aplicação: 
+            </div>
+            <div class="ml-[5px]">
+                {% if aplicacao.status == 'AC' %}
+                    Aprovado
+                {% elif aplicacao.status == 'RJ' %}
+                    Rejeitado
+                {% else %}
+                    Analisando
+                {% endif %}
+            </div>
+        </div>
+        <div class="flex justify-left mb-[5px]">
+            <div class="font-bold">
+                Resposta da aplicação: 
+            </div>
+            <div class="ml-[5px]">
+                {% if aplicacao.resposta|length > 0 %}
+                    {{ aplicacao.resposta }}
+                {% else %}
+                    Sem Resposta
+                {% endif %}
+            </div>
+        </div>
+
         {% endif %}
 
     </div> 
