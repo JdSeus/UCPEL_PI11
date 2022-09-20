@@ -97,3 +97,6 @@ def vagas(request):
 
 def vaga(request, vaga_id):
     return VagasController.vaga(request, vaga_id)
+
+def aplicar_em_vaga(request, vaga_id):
+    return VagasController.aplicar_em_vaga(request, vaga_id)
