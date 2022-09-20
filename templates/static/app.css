@@ -658,6 +658,14 @@ video {
   max-width: 800px;
 }
 
+.max-w-\[600px\] {
+  max-width: 600px;
+}
+
+.max-w-\[300px\] {
+  max-width: 300px;
+}
+
 .table-fixed {
   table-layout: fixed;
 }

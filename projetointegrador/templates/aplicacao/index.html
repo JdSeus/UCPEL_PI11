@@ -60,16 +60,26 @@
         </div>
 
         {% if usuarios %}
-            {% for usuario in usuarios %}   
-                <div class="flex">
-                    <div>
-                        {{ usuario.nome }} {{ usuario.sobrenome }}
-                    </div>
-                    <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-ver-curriculo' usuario.curriculo_id %}" hx-target="#js-dialog">
-                        Curriculo
-                    </div>
-                </div>
-            {% endfor %}
+            <table class="border-collapse table-fixed w-full bg-slate-100 max-w-[300px]">
+                <thead>
+                    <tr class="border-[2px] border-solid border-[#000]">
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Nome</th>
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Currículo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for usuario in usuarios %}   
+                <tr>
+                    <td class="border border-solid border-[#000] p-4">{{ usuario.nome }} {{ usuario.sobrenome }}</td>
+                    <td class="border border-solid border-[#000] p-4">
+                        <div class="cursor-pointer bg-yellow-600 text-white leading-none p-[5px]" hx-get="{% url 'ajax-ver-curriculo' usuario.curriculo_id %}" hx-target="#js-dialog">
+                            Curriculo
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         {% else %}
             <div>
                 Não há aplicações para a vaga.
