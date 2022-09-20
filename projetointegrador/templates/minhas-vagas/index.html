@@ -24,12 +24,16 @@
                         {{ vaga.titulo }}  
                     </div>
                     <div class="flex justify-between items-center">
+                        <a href="{% url 'aplicacao' vaga_id=vaga.id aplicacao_id=1 %}" class="block cursor-pointer bg-green-600 rounded text-white leading-none p-[5px] ml-[5px]" >
+                            Aplicações
+                        </a>
                         <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-editar-vaga' vaga.id %}" hx-target="#js-dialog">
                             {% include "pencil.html" %}
                         </div>
                         <div class="cursor-pointer bg-red-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-remover-vaga' vaga.id %}" hx-target="#js-dialog">
                             &#10005;
                         </div>
+
                     </div>
                 </div>
             {% endfor %}

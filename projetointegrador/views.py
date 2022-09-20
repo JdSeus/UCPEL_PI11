@@ -7,6 +7,7 @@ from .controllers.CheckDashboardController import CheckDashboardController
 from .controllers.CurriculoController import CurriculoController
 from .controllers.MyVagasController import MyVagasController
 from .controllers.VagasController import VagasController
+from .controllers.AplicacaoController import AplicacaoController
 
 def index(request):
     return HomeController.index(request)
@@ -103,3 +104,6 @@ def aplicar_em_vaga(request, vaga_id):
 
 def desaplicar_em_vaga(request, vaga_id):
     return VagasController.desaplicar_em_vaga(request, vaga_id)
+
+def aplicacao(request, vaga_id, aplicacao_id):
+    return AplicacaoController.index(request, vaga_id, aplicacao_id)
