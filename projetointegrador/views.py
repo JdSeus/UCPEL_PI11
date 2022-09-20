@@ -107,3 +107,6 @@ def desaplicar_em_vaga(request, vaga_id):
 
 def aplicacao(request, vaga_id):
     return AplicacaoController.index(request, vaga_id)
+
+def ajax_ver_curriculo(request, curriculo_id):
+    return CurriculoController.ajax_ver_curriculo(request, curriculo_id)

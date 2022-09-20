@@ -1,0 +1,114 @@
+<div class="block p-[16px] bg-slate-300  m-auto">
+
+
+    <div class="font-bold mb-[20px] text-center">
+        CURRÍCULO
+    </div>
+
+    <div class="mb-[10px]">
+        <div class="font-bold">
+            Nome:   
+        </div>
+        <div class="mb-[10px]">
+            {{ usuario.nome }} {{ usuario.sobrenome }}      
+        </div>
+    </div>
+
+    <div class="mb-[10px]">
+        <div class="font-bold">
+            E-mail:   
+        </div>
+        <div class="mb-[10px]">
+            {{ usuario.email }}      
+        </div>
+    </div>
+
+    <div class="mb-[10px]">
+        <div class="font-bold">
+            Endereço:   
+        </div>
+        <div class="flex justify-center mb-[5px]">
+            <div>
+                {{ usuario.curriculo.endereco.rua }}   
+            </div>
+            <div class="ml-[5px]">
+                {{ usuario.curriculo.endereco.bairro }}   
+            </div>
+            <div class="ml-[5px]">
+                {{ usuario.curriculo.endereco.cidade }}   
+            </div>
+            <div class="ml-[5px]">
+                {{ usuario.curriculo.endereco.estado }}   
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="font-bold">
+            Telefones:   
+        </div>
+    </div>
+    {% if usuario.curriculo.telefones.all.count > 0 %}
+    <div class="mb-[10px]">
+        {% for telefone in usuario.curriculo.telefones.all %}        
+            <div class="flex justify-between mb-[5px]">
+                <div>
+                    {{ telefone.telefone }}  
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div>
+        <div class="font-bold">
+            Links:   
+        </div>
+    </div>
+    {% if usuario.curriculo.links.all.count > 0 %}
+    <div class="mb-[10px]">
+        {% for link in usuario.curriculo.links.all %}        
+            <div class="flex justify-between mb-[5px]">
+                <div>
+                    <a class="text-blue-500" href="{{ link.link }}" target="_blank">{{ link.titulo }}</a> 
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div>
+        <div class="font-bold">
+            Escolaridade:   
+        </div>
+    </div>
+    {% if usuario.curriculo.escolaridades.all.count > 0 %}
+    <div class="mb-[10px]">
+        {% for escolaridade in usuario.curriculo.escolaridades.all %}        
+            <div class="flex justify-between mb-[5px]">
+                <div>
+                    {{ escolaridade.curso }}  
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div>
+        <div class="font-bold">
+            Cursos:   
+        </div>
+    </div>
+    {% if usuario.curriculo.cursos.all.count > 0 %}
+    <div class="mb-[10px]">
+        {% for curso in usuario.curriculo.cursos.all %}        
+            <div class="flex justify-between mb-[5px]">
+                <div>
+                    {{ curso.titulo }}  
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+</div>

@@ -61,8 +61,13 @@
 
         {% if usuarios %}
             {% for usuario in usuarios %}   
-                <div>
-                    {{ usuario.nome }} {{ usuario.sobrenome }}
+                <div class="flex">
+                    <div>
+                        {{ usuario.nome }} {{ usuario.sobrenome }}
+                    </div>
+                    <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-ver-curriculo' usuario.curriculo_id %}" hx-target="#js-dialog">
+                        Curriculo
+                    </div>
                 </div>
             {% endfor %}
         {% else %}

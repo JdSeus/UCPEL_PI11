@@ -38,6 +38,14 @@ class CurriculoController():
 
         return render(request, 'curriculo/index.html', {'usuario': usuario})
 
+
+    def ajax_ver_curriculo(request, curriculo_id):
+
+        curriculo = get_object_or_404(Curriculo, id=curriculo_id)
+        usuario = get_object_or_404(Usuario, curriculo_id=curriculo.id)
+
+        return render(request, 'curriculo/simple-curriculo.html', {'usuario': usuario})
+
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_editar_endereco(request):
 
