@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for vaga in vagas.all %}   
+                    {% for vaga in vagas %}   
                     <tr>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.id }}</td>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.titulo }}</td>
@@ -50,7 +50,9 @@
                                 Ver
                             </a>
                         </td>
-                        <td class="border border-solid border-[#000] p-4">Não</td>
+                        <td class="border border-solid border-[#000] p-4">
+                            {{ vaga.has_vaga|yesno:"Sim,Não" }}
+                        </td>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.concluida|yesno:"Sim,Não" }}</td>
                     </tr>
                     {% endfor %}

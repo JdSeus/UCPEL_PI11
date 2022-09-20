@@ -17,14 +17,32 @@ from ..models import Curriculo
 
 class VagasController():
 
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def index(request):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        if usuario.curriculo is None:
+            curriculo = Curriculo()
+            curriculo.save()
+            usuario.curriculo = curriculo
+            usuario.save()
+
         vagas = Vaga.objects.filter(publicar=True)
 
-        # dump_data = dd(request, vagas)
-        # return HttpResponse(dump_data)
+        aplicacoes = Aplicacao.objects.prefetch_related('vagas').filter(curriculos__id=usuario.curriculo.id)
+
+        for idx, vaga in enumerate(vagas):
+            setattr(vagas[idx], "has_vaga", False)
+            for aplicacao in aplicacoes:
+                if (aplicacao.vagas.count() > 0):
+                    for vaga_em_aplicacao in aplicacao.vagas.all():
+                        if (vaga_em_aplicacao.id == vaga.id):
+                            setattr(vagas[idx], "has_vaga", True)
 
         return render(request, 'vagas/index.html', {
-            'vagas': vagas
+            'vagas': vagas,
+            'aplicacoes': aplicacoes,
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
