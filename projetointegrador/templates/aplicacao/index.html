@@ -59,7 +59,7 @@
             APLICAÇÕES
         </div>
 
-        {% if usuarios %}
+        {% if usuarios_e_aplicacao %}
             <table class="border-collapse table-fixed w-full bg-slate-100 max-w-[500px]">
                 <thead>
                     <tr class="border-[2px] border-solid border-[#000]">
@@ -69,7 +69,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for usuario in usuarios %}   
+                {% for usuario, aplicacao in usuarios_e_aplicacao %}   
                 <tr>
                     <td class="border border-solid border-[#000] p-4">{{ usuario.nome }} {{ usuario.sobrenome }}</td>
                     <td class="border border-solid border-[#000] p-4">
@@ -78,7 +78,7 @@
                         </div>
                     </td>
                     <td class="border border-solid border-[#000] p-4">
-                        <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]"">
+                        <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-responder-aplicacao' aplicacao.id %}" hx-target="#js-dialog">
                             Responder
                         </div>
                     </td>
@@ -95,4 +95,18 @@
     </div> 
 </div>
 
+{%endblock%}
+
+{%block scripts%}
+<script>
+    
+    function reloadPage() {
+        window.location.href = window.location.pathname + window.location.search + window.location.hash;
+    }
+
+    htmx.on("aplicacaoListChanged", (e) => {
+        reloadPage();
+    });
+    
+</script>
 {%endblock%}

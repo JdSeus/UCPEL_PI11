@@ -110,3 +110,6 @@ def aplicacao(request, vaga_id):
 
 def ajax_ver_curriculo(request, curriculo_id):
     return CurriculoController.ajax_ver_curriculo(request, curriculo_id)
+
+def ajax_responder_aplicacao(request, aplicacao_id):
+    return AplicacaoController.ajax_responder_aplicacao(request, aplicacao_id)

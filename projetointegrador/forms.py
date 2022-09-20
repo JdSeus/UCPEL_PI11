@@ -10,6 +10,7 @@ from .models import Telefone
 from .models import Link
 from .models import Escolaridade
 from .models import Curso
+from .models import Aplicacao
 
 from .models import Vaga
 
@@ -72,3 +73,8 @@ class VagaFormEdit(ModelForm):
         widgets = {
             'categoria': forms.CheckboxSelectMultiple(),
         }
+
+class AplicacaoForm(ModelForm):
+    class Meta:
+        model = Aplicacao
+        exclude = ['curriculos', 'vagas']
