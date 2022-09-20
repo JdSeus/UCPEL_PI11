@@ -34,5 +34,5 @@ urlpatterns = [
     path('vaga/<int:vaga_id>', views.vaga, name='vaga'),
     path('aplicar-em-vaga/<int:vaga_id>', views.aplicar_em_vaga, name='aplicar-em-vaga'),
     path('desaplicar-em-vaga/<int:vaga_id>', views.desaplicar_em_vaga, name='desaplicar-em-vaga'),
-    path('aplicacao/<int:vaga_id>/<int:aplicacao_id>', views.aplicacao, name='aplicacao'),
+    path('aplicacao/<int:vaga_id>', views.aplicacao, name='aplicacao'),
 ]

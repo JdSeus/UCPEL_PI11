@@ -5,7 +5,59 @@
 <div class="min-h-[calc(100vh-90px-20vh)] flex items-center">
     <div class="block p-[16px] bg-slate-300  m-auto">
 
-        APLICACAO
+        <div class="font-bold mb-[20px] flex">
+            <a class="font-bold block hover:text-blue-800" href="{% url 'dashboard-empresa' %}">
+                Dashboard
+            </a>
+            <a class="font-bold block hover:text-blue-800 ml-[5px]" href="{% url 'minhas-vagas' %}">
+                Minhas Vagas
+            </a>
+        </div>
+
+        <div class="font-bold mb-[20px] text-center">
+            VAGA
+        </div>
+
+        <div class="flex justify-left mb-[5px]">
+            <div class="font-bold">
+                Título: 
+            </div>
+            <div class="ml-[5px]">
+                {{ vaga.titulo }}
+            </div>
+        </div>
+
+        <div class="flex justify-left mb-[5px]">
+            <div class="font-bold">
+                Categorias: 
+            </div>
+            <div class="ml-[5px]">
+                {% if vaga.categoria.all.count > 0 %}
+                    {% for categoria in vaga.categoria.all %}  
+                        {% if forloop.first %}
+                            {{ categoria }}
+                        {% else %}
+                            , {{ categoria }}
+                        {% endif %}
+                    {% endfor %} 
+                {% else %}
+                    Sem Categoria
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="flex justify-left mb-[5px]">
+            <div class="font-bold">
+                Descrição: 
+            </div>
+            <div class="ml-[5px]">
+                {{ vaga.descricao }}
+            </div>
+        </div>
+
+        <div class="font-bold mb-[20px] text-center mt-[20px]">
+            APLICAÇÕES
+        </div>
 
     </div> 
 </div>

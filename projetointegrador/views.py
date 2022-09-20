@@ -105,5 +105,5 @@ def aplicar_em_vaga(request, vaga_id):
 def desaplicar_em_vaga(request, vaga_id):
     return VagasController.desaplicar_em_vaga(request, vaga_id)
 
-def aplicacao(request, vaga_id, aplicacao_id):
-    return AplicacaoController.index(request, vaga_id, aplicacao_id)
+def aplicacao(request, vaga_id):
+    return AplicacaoController.index(request, vaga_id)
