@@ -24,6 +24,7 @@
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Categorias</th>
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Visualizar</th>
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Apliquei?</th>
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Resultado</th>
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Concluída</th>
                     </tr>
                 </thead>
@@ -52,6 +53,17 @@
                         </td>
                         <td class="border border-solid border-[#000] p-4">
                             {{ vaga.has_vaga|yesno:"Sim,Não" }}
+                        </td>
+                        <td class="border border-solid border-[#000] p-4">
+                            {% if vaga.result == 'AC' %}
+                                Aprovado
+                            {% elif vaga.result == 'RJ' %}
+                                Rejeitado
+                            {% elif vaga.result == 'AN' %}
+                                Analisando
+                            {% else %}
+                                Não aplicado
+                            {% endif %}
                         </td>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.concluida|yesno:"Sim,Não" }}</td>
                     </tr>

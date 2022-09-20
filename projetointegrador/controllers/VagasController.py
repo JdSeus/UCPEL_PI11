@@ -34,11 +34,13 @@ class VagasController():
 
         for idx, vaga in enumerate(vagas):
             setattr(vagas[idx], "has_vaga", False)
+            setattr(vagas[idx], "result", False)
             for aplicacao in aplicacoes:
                 if (aplicacao.vagas.count() > 0):
                     for vaga_em_aplicacao in aplicacao.vagas.all():
                         if (vaga_em_aplicacao.id == vaga.id):
                             setattr(vagas[idx], "has_vaga", True)
+                            setattr(vagas[idx], "result", aplicacao.status)
 
         return render(request, 'vagas/index.html', {
             'vagas': vagas,
