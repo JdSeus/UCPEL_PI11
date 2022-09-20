@@ -87,6 +87,6 @@ class AplicacaoController():
             form = AplicacaoForm(instance=aplicacao)
 
         return render(request, 'generic_form.html', {
-            'title': "Editar Aplicacao: ",
+            'title': "Responder Aplicacao: ",
             'form': form
         })

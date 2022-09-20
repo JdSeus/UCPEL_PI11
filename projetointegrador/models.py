@@ -146,4 +146,4 @@ class Aplicacao(models.Model):
         choices=STATUSES,
         default=ANALYZING,
     )
-    resposta = models.CharField(max_length=1023)
+    resposta = models.CharField(max_length=1023, blank=True, null=True)

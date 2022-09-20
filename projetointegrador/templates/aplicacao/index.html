@@ -65,6 +65,7 @@
                     <tr class="border-[2px] border-solid border-[#000]">
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Nome</th>
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Currículo</th>
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Status</th>
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Responder</th>
                     </tr>
                 </thead>
@@ -76,6 +77,15 @@
                         <div class="cursor-pointer text-red-700 leading-none p-[5px]" hx-get="{% url 'ajax-ver-curriculo' usuario.curriculo_id %}" hx-target="#js-dialog">
                             Curriculo
                         </div>
+                    </td>
+                    <td class="border border-solid border-[#000] p-4">
+                        {% if aplicacao.status == 'AC' %}
+                            Aprovado
+                        {% elif aplicacao.status == 'RJ' %}
+                            Rejeitado
+                        {% else %}
+                            Analisando
+                        {% endif %}
                     </td>
                     <td class="border border-solid border-[#000] p-4">
                         <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-responder-aplicacao' aplicacao.id %}" hx-target="#js-dialog">
@@ -99,7 +109,7 @@
 
 {%block scripts%}
 <script>
-    
+
     function reloadPage() {
         window.location.href = window.location.pathname + window.location.search + window.location.hash;
     }
