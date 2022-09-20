@@ -60,11 +60,12 @@
         </div>
 
         {% if usuarios %}
-            <table class="border-collapse table-fixed w-full bg-slate-100 max-w-[300px]">
+            <table class="border-collapse table-fixed w-full bg-slate-100 max-w-[500px]">
                 <thead>
                     <tr class="border-[2px] border-solid border-[#000]">
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Nome</th>
                         <th class="border border-solid border-[#000] font-medium p-4 text-left">Currículo</th>
+                        <th class="border border-solid border-[#000] font-medium p-4 text-left">Responder</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,8 +73,13 @@
                 <tr>
                     <td class="border border-solid border-[#000] p-4">{{ usuario.nome }} {{ usuario.sobrenome }}</td>
                     <td class="border border-solid border-[#000] p-4">
-                        <div class="cursor-pointer bg-yellow-600 text-white leading-none p-[5px]" hx-get="{% url 'ajax-ver-curriculo' usuario.curriculo_id %}" hx-target="#js-dialog">
+                        <div class="cursor-pointer text-red-700 leading-none p-[5px]" hx-get="{% url 'ajax-ver-curriculo' usuario.curriculo_id %}" hx-target="#js-dialog">
                             Curriculo
+                        </div>
+                    </td>
+                    <td class="border border-solid border-[#000] p-4">
+                        <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]"">
+                            Responder
                         </div>
                     </td>
                 </tr>
