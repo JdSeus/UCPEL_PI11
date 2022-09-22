@@ -32,7 +32,7 @@
                     {% for vaga in vagas %}   
                     <tr>
                         <td class="border border-solid border-[#000] p-4">{{ vaga.id }}</td>
-                        <td class="border border-solid border-[#000] p-4">{{ vaga.titulo }}</td>
+                        <td class="font-bold italic border border-solid border-[#000] p-4">{{ vaga.titulo }}</td>
                         <td class="border border-solid border-[#000] p-4">
                             {% if vaga.categoria.all.count > 0 %}
                                 {% for categoria in vaga.categoria.all %}  
