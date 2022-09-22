@@ -172,7 +172,9 @@
                         {{ historico.cargo }}  
                     </div>
                     <div class="flex justify-between items-center">
-
+                        <div class="cursor-pointer bg-yellow-600 rounded text-white leading-none p-[5px] ml-[5px]" hx-get="{% url 'ajax-editar-historico' historico.id %}" hx-target="#js-dialog">
+                            {% include "pencil.html" %}
+                        </div>
                     </div>
                 </div>
             {% endfor %}

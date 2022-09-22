@@ -380,6 +380,42 @@ class CurriculoController():
             'title': "Adicionar Histórico Profissional"
         })
 
+    
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_editar_historico(request, historico_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        empresas = usuario.curriculo.empresas.all()
+
+        userHasHistorico = False
+        auxhistorico = None
+
+        for historico in empresas:
+            if historico.id == historico_id:
+                userHasHistorico = True
+                auxhistorico = historico
+                break
+
+        if userHasHistorico == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            form = HistoricoForm(request.POST)
+            if form.is_valid():
+
+                historico = Historico.objects.filter(id=auxhistorico.id).update(**form.cleaned_data)
+
+                return HttpResponse(status=204, headers={'HX-Trigger': 'historicoListChanged'})
+        else:
+            form = HistoricoForm(instance=auxhistorico)
+
+        return render(request, 'generic_form.html', {
+            'title': "Editar Histórico Profissional: ",
+            'form': form
+        })
+
+
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_adicionar_curso(request):
 

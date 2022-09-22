@@ -78,6 +78,9 @@ def ajax_remover_escolaridade(request, escolaridade_id):
 def ajax_adicionar_historico(request):
     return CurriculoController.ajax_adicionar_historico(request)
 
+def ajax_editar_historico(request, historico_id):
+    return CurriculoController.ajax_editar_historico(request, historico_id)
+
 def ajax_adicionar_curso(request):
     return CurriculoController.ajax_adicionar_curso(request)
 
