@@ -6,10 +6,13 @@
     <div class="block p-[16px] bg-slate-300  m-auto">
 
         <div class="font-bold mb-[20px] flex">
-            <a class="font-bold block hover:text-blue-800" href="{% url 'dashboard-empresa' %}">
+            <a class="italic font-bold block hover:text-blue-800" href="{% url 'dashboard-empresa' %}">
                 Dashboard
             </a>
-            <a class="font-bold block hover:text-blue-800 ml-[5px]" href="{% url 'minhas-vagas' %}">
+            <div>
+                &nbsp;|
+            </div>
+            <a class="italic font-bold block hover:text-blue-800 ml-[5px]" href="{% url 'minhas-vagas' %}">
                 Minhas Vagas
             </a>
         </div>
