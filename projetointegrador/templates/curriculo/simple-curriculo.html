@@ -96,6 +96,23 @@
 
     <div>
         <div class="font-bold">
+            Histórico Profissional:   
+        </div>
+    </div>
+    {% if usuario.curriculo.empresas.all.count > 0 %}
+    <div class="mb-[10px]">
+        {% for historico in usuario.curriculo.empresas.all %}        
+            <div class="flex justify-between mb-[5px]">
+                <div>
+                    {{ historico.cargo }}  
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div>
+        <div class="font-bold">
             Cursos:   
         </div>
     </div>
