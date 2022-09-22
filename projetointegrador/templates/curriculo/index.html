@@ -159,6 +159,39 @@
             </div>
         </div>
 
+        <div>
+            <div class="font-bold">
+                Histório Profissional:   
+            </div>
+        </div>
+        {% if usuario.curriculo.empresas.all.count > 0 %}
+        <div class="mb-[10px]">
+            {% for historico in usuario.curriculo.empresas.all %}        
+                <div class="flex justify-between mb-[5px]">
+                    <div>
+                        {{ historico.cargo }}  
+                    </div>
+                    <div class="flex justify-between items-center">
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="mb-[10px]">
+            <div class="text-white cursor-pointer w-fit p-[5px] bg-green-600" hx-get="{% url 'ajax-adicionar-historico' %}" hx-target="#js-dialog">
+                <div class="flex">
+                    <div>
+                        Adicionar Histórico Profissional
+                    </div>
+                    <div class="bg-green-600 rounded text-white leading-none p-[5px] ml-[5px]">
+                        {% include "plus.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
         <div>
             <div class="font-bold">
@@ -224,6 +257,11 @@
     htmx.on("escolaridadeListChanged", (e) => {
         reloadPage();
     });
+
+    htmx.on("historicoListChanged", (e) => {
+        reloadPage();
+    });
+
 
     htmx.on("cursoListChanged", (e) => {
         reloadPage();

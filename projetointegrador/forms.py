@@ -9,6 +9,7 @@ from .models import Endereco
 from .models import Telefone
 from .models import Link
 from .models import Escolaridade
+from .models import Historico
 from .models import Curso
 from .models import Aplicacao
 
@@ -43,6 +44,15 @@ class LinkForm(ModelForm):
 class EscolaridadeForm(ModelForm):
     class Meta:
         model = Escolaridade
+        exclude = []
+        widgets = {
+            'inicio': DateInput(),
+            'fim': DateInput(),
+        }
+
+class HistoricoForm(ModelForm):
+    class Meta:
+        model = Historico
         exclude = []
         widgets = {
             'inicio': DateInput(),

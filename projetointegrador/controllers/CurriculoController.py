@@ -10,6 +10,7 @@ from ..forms import EnderecoForm
 from ..forms import TelefoneForm
 from ..forms import LinkForm
 from ..forms import EscolaridadeForm
+from ..forms import HistoricoForm
 from ..forms import CursoForm
 
 from ..models import Usuario
@@ -18,6 +19,7 @@ from ..models import Endereco
 from ..models import Telefone
 from ..models import Link
 from ..models import Escolaridade
+from ..models import Historico
 from ..models import Curso
 
 from ..helpers import dd
@@ -348,6 +350,34 @@ class CurriculoController():
         return render(request, 'generic_form.html', {
             'title': "Deseja remover esta escolaridade?",
             'label': "Curso: " + auxescolaridade.curso 
+        })
+
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_adicionar_historico(request):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        if request.method == "POST":
+            form = HistoricoForm(request.POST)
+            if form.is_valid():
+
+                if usuario.curriculo is None:
+                    curriculo = Curriculo()
+                    curriculo.save()
+                    usuario.curriculo = curriculo
+                    usuario.save()
+                
+                historico = Historico.objects.create(**form.cleaned_data)
+
+                usuario.curriculo.empresas.add(historico)
+                usuario.curriculo.save()
+
+                return HttpResponse(status=204, headers={'HX-Trigger': 'historicoListChanged'})
+        else:
+            form = HistoricoForm()
+        return render(request, 'generic_form.html', {
+            'form': form,
+            'title': "Adicionar Histórico Profissional"
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
