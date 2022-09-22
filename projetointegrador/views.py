@@ -10,7 +10,10 @@ from .controllers.VagasController import VagasController
 from .controllers.AplicacaoController import AplicacaoController
 
 def index(request):
-    return HomeController.index(request)
+    if request.user.is_authenticated:
+        return CheckDashboardController.index(request)
+    else:
+        return HomeController.index(request)
 
 def login_usuario(request):
     return UsuarioController.login_usuario(request)
