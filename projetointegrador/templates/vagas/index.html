@@ -3,7 +3,7 @@
 {%block conteudo%}
 
 <div class="min-h-[calc(100vh-90px-20vh)] flex items-center">
-    <div class="block p-[16px] bg-slate-300 m-auto max-w-[800px]">
+    <div class="block p-[16px] bg-slate-300 m-auto max-w-[1000px]">
 
         <div class="font-bold mb-[20px]">
             <a class="italic font-bold block hover:text-blue-800" href="{% url 'dashboard-usuario' %}">
@@ -47,25 +47,51 @@
                             {% endif %}
                         </td>
                         <td class="border border-solid border-[#000] p-4">
-                            <a class="block text-green-700 hover:text-blue-800" href="{% url 'vaga' vaga.id %}">
+                            <a class="block bg-blue-500 text-white rounded-[5em] text-center p-[5px]" href="{% url 'vaga' vaga.id %}">
                                 Ver
                             </a>
                         </td>
                         <td class="border border-solid border-[#000] p-4">
-                            {{ vaga.has_vaga|yesno:"Sim,Não" }}
+                            {% if vaga.has_vaga == True %}
+                                <div class="bg-green-400 text-black rounded-[10em] text-center p-[10px]">
+                                    SIM
+                                </div>
+                            {% else %}
+                                <div class="bg-red-300 text-black rounded-[10em] text-center p-[10px]">
+                                    NÃO
+                                </div>
+                            {% endif %}
                         </td>
                         <td class="border border-solid border-[#000] p-4">
                             {% if vaga.result == 'AC' %}
-                                Aprovado
+                                <div class="bg-green-600 text-white rounded-[10em] text-center p-[10px]">
+                                    Aprovado
+                                </div>
                             {% elif vaga.result == 'RJ' %}
-                                Rejeitado
+                                <div class="bg-red-600 text-white rounded-[10em] text-center p-[10px]">
+                                    Rejeitado
+                                </div>
                             {% elif vaga.result == 'AN' %}
-                                Analisando
+                                <div class="bg-yellow-600 text-white rounded-[10em] text-center p-[10px]">
+                                    Analisando
+                                </div>
                             {% else %}
-                                Não aplicado
+                                <div class="bg-gray-300 text-black rounded-[10em] text-center p-[10px] whitespace-nowrap">
+                                    Não aplicado
+                                </div>        
                             {% endif %}
                         </td>
-                        <td class="border border-solid border-[#000] p-4">{{ vaga.concluida|yesno:"Sim,Não" }}</td>
+                        <td class="border border-solid border-[#000] p-4">
+                            {% if vaga.concluida == True %}
+                                <div class="bg-green-400 text-black rounded-[10em] text-center p-[10px]">
+                                    SIM
+                                </div>
+                            {% else %}
+                                <div class="bg-red-300 text-black rounded-[10em] text-center p-[10px]">
+                                    NÃO
+                                </div>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
