@@ -415,6 +415,33 @@ class CurriculoController():
             'form': form
         })
 
+    @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    def ajax_remover_historico(request, historico_id):
+
+        usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
+
+        empresas = usuario.curriculo.empresas.all()
+
+        userHasHistorico = False
+        auxhistorico = None
+
+        for historico in empresas:
+            if historico.id == historico_id:
+                userHasHistorico = True
+                auxhistorico = historico
+                break
+
+        if userHasHistorico == False:
+            return HttpResponseForbidden()
+
+        if request.method == "POST":
+            Historico.objects.filter(id=auxhistorico.id).delete()
+            return HttpResponse(status=204, headers={'HX-Trigger': 'historicoListChanged'})
+
+        return render(request, 'generic_form.html', {
+            'title': "Deseja remover este Histórico Profissional?",
+            'label': "Cargo: " + auxhistorico.cargo 
+        })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_adicionar_curso(request):
