@@ -3,6 +3,8 @@
 from django.db import migrations, models
 
 
+# The migration will remove the escolaridade field from the Curriculo model, and add a new field
+# called escolaridades that is a many-to-many field to the Escolaridade model
 class Migration(migrations.Migration):
 
     dependencies = [

@@ -4,7 +4,8 @@ from ..models import Empresa
 from ..models import Usuario
 
 class CheckDashboardController():
-
+    # It checks if the user is logged in and if it is an instance of Empresa, if it is, it redirects to
+    # the dashboard-empresa page
     def user_is_Empresa(user):
         return user.is_authenticated and isinstance(user, Empresa)
 

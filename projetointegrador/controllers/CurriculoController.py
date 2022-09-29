@@ -34,7 +34,15 @@ class CurriculoController():
     # pprint(dir(usuario))
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    
     def index(request):
+        """
+        I'm trying to get the user's curriculum, which is related to the user's phone number and link
+        
+        :param request: The current request object
+        :param curriculo_id: The id of the Curriculo object that I want to get
+        :return: a render of the template 'curriculo/simple-curriculo.html' with the context 'usuario'
+        """
 
         usuario = Usuario.objects.prefetch_related('curriculo', 'curriculo__telefones', 'curriculo__links').get(id=request.user.id)
 
@@ -85,8 +93,14 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_adicionar_telefone(request):
-
+        """
+        It creates a new Telefone object and adds it to the Curriculo object of the logged in user
+        
+        :param request: The request object
+        :return: A form to add a phone number.
+        """
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
         if request.method == "POST":
@@ -113,6 +127,14 @@ class CurriculoController():
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_editar_telefone(request, telefone_id):
+        """
+        If the user is logged in, and the user is a Usuario, and the user is trying to edit a Telefone
+        that belongs to him, then edit the Telefone
+        
+        :param request: The current request object
+        :param telefone_id: The id of the telefone to be edited
+        :return: A HttpResponse object with a status code of 204.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -147,6 +169,14 @@ class CurriculoController():
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_remover_telefone(request, telefone_id):
+        """
+        If the user is logged in and is a Usuario, then it will check if the user has the telefone_id,
+        if it does, then it will delete it
+        
+        :param request: The request object
+        :param telefone_id: the id of the phone to be removed
+        :return: A list of all the telefones of the user.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -174,7 +204,20 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+       
     def ajax_adicionar_link(request):
+        """
+        If the user is logged in, and the request is a POST, and the form is valid, then create a new
+        link and add it to the user's curriculum
+        
+        :param request: The request object
+        :return: A function that returns a function that returns a function that returns a function that
+        returns a function that returns a function that returns a function that returns a function that
+        returns a function that returns a function that returns a function that returns a function that
+        returns a function that returns a function that returns a function that returns a function that
+        returns a function that returns a function that returns a function that returns a function that
+        returns
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -202,6 +245,14 @@ class CurriculoController():
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
     def ajax_editar_link(request, link_id):
+        """
+        If the user is logged in, and the user is a Usuario, and the user is requesting a POST, and the
+        form is valid, then update the link
+        
+        :param request: The request object
+        :param link_id: The id of the link to be edited
+        :return: A HttpResponse object with status code 204.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -235,7 +286,15 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+    
     def ajax_remover_link(request, link_id):
+        """
+        If the user is logged in and has the link, delete the link and return a 204 status code
+        
+        :param request: The request object
+        :param link_id: the id of the link to be removed
+        :return: A HttpResponseForbidden() is being returned.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -263,7 +322,15 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_adicionar_escolaridade(request):
+        """
+        It creates a new Escolaridade object, adds it to the user's Curriculo object, and then returns a
+        204 status code with a custom header
+        
+        :param request: The request object
+        :return: A form to add a new education.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -291,7 +358,16 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_editar_escolaridade(request, escolaridade_id):
+        """
+        If the user is logged in, and the user is a Usuario, and the user has the escolaridade_id, and
+        the form is valid, then update the escolaridade
+        
+        :param request: The current request object
+        :param escolaridade_id: The id of the escolaridade to be edited
+        :return: A list of all the escolaridades of the user.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -325,7 +401,15 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_remover_escolaridade(request, escolaridade_id):
+        """
+        If the user is logged in and has the escolaridade_id in his/her escolaridades, then delete it
+        
+        :param request: The current request object
+        :param escolaridade_id: The id of the escolaridade to be removed
+        :return: a render of the generic_form.html template.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -353,8 +437,20 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_adicionar_historico(request):
-
+        """
+        If the request is a POST, then create a new Historico object with the data from the form, add it
+        to the Curriculo object, and return a 204 status code
+        
+        :param request: The request object
+        :return: A function that returns a function that returns a function that returns a function that
+        returns a function that returns a function that returns a function that returns a function that
+        returns a function that returns a function that returns a function that returns a function that
+        returns a function that returns a function that returns a function that returns a function that
+        returns a function that returns a function that returns a function that returns a function that
+        returns
+        """
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
         if request.method == "POST":
@@ -382,7 +478,18 @@ class CurriculoController():
 
     
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_editar_historico(request, historico_id):
+        """
+        If the user is logged in, and the user is a Usuario, and the user has a Historico with the given
+        id, and the request is a POST, and the form is valid, then update the Historico with the given
+        id with the data from the form, and return a 204 status code with a header that triggers a
+        javascript function
+        
+        :param request: The request object
+        :param historico_id: The id of the historico to be edited
+        :return: A HttpResponse object with status code 204.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -416,7 +523,16 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_remover_historico(request, historico_id):
+        """
+        If the user is logged in and is a Usuario, then it will check if the user has the historico_id
+        in his/her list of empresas. If it does, then it will delete it
+        
+        :param request: The request object
+        :param historico_id: The id of the historico to be removed
+        :return: A list of all the objects in the database.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -444,7 +560,15 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_adicionar_curso(request):
+        """
+        It creates a new Curso object and adds it to the Curriculo object of the logged in user
+        
+        :param request: The request object
+        :return: A HttpResponse object with a status code of 204 and a header of 'HX-Trigger':
+        'cursoListChanged'
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -473,7 +597,16 @@ class CurriculoController():
 
     
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_editar_curso(request, curso_id):
+        """
+        If the user is logged in, and the user has the course, and the method is POST, and the form is
+        valid, then update the course
+        
+        :param request: The request object
+        :param curso_id: The id of the course to be edited
+        :return: A HttpResponse object with status code 204.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -507,7 +640,17 @@ class CurriculoController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def ajax_remover_curso(request, curso_id):
+        """
+        If the user is logged in and has the permission to access the page, then the function will check
+        if the user has the course in his curriculum, if he does, then it will delete the course from
+        the database and return a 204 status code, if he doesn't, then it will return a 403 status code
+        
+        :param request: The request object
+        :param curso_id: The id of the course to be removed
+        :return: A HttpResponseForbidden object.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 

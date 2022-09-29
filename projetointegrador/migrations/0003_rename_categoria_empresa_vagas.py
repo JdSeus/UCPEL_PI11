@@ -4,6 +4,7 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
+# Renaming the field `categoria` to `vagas` in the model `empresa`
 
     dependencies = [
         ('projetointegrador', '0002_remove_curriculo_escolaridade_and_more'),

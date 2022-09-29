@@ -16,7 +16,16 @@ from pprint import pprint
 class MyVagasController():
 
     @user_passes_test(Empresa.user_is_Empresa, login_url="login-empresa")
+        
     def index(request):
+        """
+        If the user is not logged in, redirect to the login page. If the user is logged in, but is not an
+        Empresa, redirect to the login page. If the user is logged in and is an Empresa, render the index
+        page
+        
+        :param request: The request object
+        :return: The index view is returning a render of the index.html template.
+        """
 
         empresa = Empresa.objects.get(id=request.user.id)
 
@@ -24,7 +33,15 @@ class MyVagasController():
 
 
     @user_passes_test(Empresa.user_is_Empresa, login_url="login-empresa")
+        
     def ajax_adicionar_vaga(request):
+        """
+        It creates a new Vaga object, adds it to the Empresa object, and then returns a 204 status code with
+        a custom header
+        
+        :param request: The request object
+        :return: A form to add a new job vacancy.
+        """
 
         empresa = Empresa.objects.get(id=request.user.id)
 
@@ -56,7 +73,18 @@ class MyVagasController():
         })
 
     @user_passes_test(Empresa.user_is_Empresa, login_url="login-empresa")
+        
     def ajax_editar_vaga(request, vaga_id):
+        """
+        It checks if the user is an empresa, if it is, it checks if the user has the vaga, if it does, it
+        checks if the request is a POST, if it is, it checks if the form is valid, if it is, it updates the
+        vaga and returns a 204 status code, if it isn't, it returns the form, if the request isn't a POST,
+        it returns the form
+        
+        :param request: The request object
+        :param vaga_id: The id of the vaga that will be edited
+        :return: A HttpResponse object with a status code of 204.
+        """
 
         empresa = Empresa.objects.get(id=request.user.id)
 
@@ -106,8 +134,16 @@ class MyVagasController():
         })
 
     @user_passes_test(Empresa.user_is_Empresa, login_url="login-empresa")
+        
     def ajax_remover_vaga(request, vaga_id):
-
+        """
+        If the user is logged in as an Empresa, and the request is a POST, then delete the Vaga with the
+        given id
+        
+        :param request: The request object
+        :param vaga_id: The id of the vacancy to be removed
+        :return: A HttpResponseForbidden() is being returned.
+        """
         empresa = Empresa.objects.get(id=request.user.id)
 
         vagas = empresa.vagas.all()

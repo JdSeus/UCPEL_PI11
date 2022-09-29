@@ -11,6 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
+# Setting the environment variable DJANGO_SETTINGS_MODULE to the value of projeto.settings.
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'projeto.settings')
 
 application = get_wsgi_application()

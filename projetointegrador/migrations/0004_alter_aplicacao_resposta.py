@@ -5,6 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
+    # Renaming the column name from categoria to empresa_vagas.
     dependencies = [
         ('projetointegrador', '0003_rename_categoria_empresa_vagas'),
     ]

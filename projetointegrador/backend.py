@@ -27,6 +27,14 @@ class UsuarioBackend(BaseBackend):
 class EmpresaBackend(BaseBackend):
 
     def authenticate(self, request, cnpj=None, password=None):
+        """
+        If the password is valid, return the user object, otherwise return None
+        
+        :param request: The request object
+        :param cnpj: The username of the user trying to authenticate
+        :param password: The password to check
+        :return: The user object
+        """
         try:
             empresa = Empresa.objects.get(cnpj=cnpj)
         except Empresa.DoesNotExist:
@@ -37,6 +45,12 @@ class EmpresaBackend(BaseBackend):
         return None
 
     def get_user(self, empresa_id):
+        """
+        If the user exists, return the user. If the user doesn't exist, return None
+        
+        :param empresa_id: The primary key of the user you want to get
+        :return: The user object if it exists, or None if it doesn't.
+        """
         try: 
             return Empresa.objects.get(pk=empresa_id)
         except Empresa.DoesNotExist:

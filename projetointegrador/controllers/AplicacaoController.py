@@ -15,6 +15,8 @@ from ..helpers import dd
 
 from pprint import pprint
 
+# The index method of the AplicacaoController class is a view that returns a list of applications for
+# a specific job
 class AplicacaoController():
 
     @user_passes_test(Empresa.user_is_Empresa, login_url='login-empresa')
@@ -52,7 +54,16 @@ class AplicacaoController():
         })
 
     @user_passes_test(Empresa.user_is_Empresa, login_url='login-empresa')
+
     def ajax_responder_aplicacao(request, aplicacao_id):
+        """
+        It checks if the user is an Empresa, if it is, it checks if the user has the vaga that the
+        aplicacao is applying to, if it does, it renders the form
+        
+        :param request: The current request object
+        :param aplicacao_id: The id of the aplicacao that is being responded to
+        :return: A form with the title "Responder Aplicacao: " and the form.
+        """
 
         empresa = Empresa.objects.get(id=request.user.id)
 

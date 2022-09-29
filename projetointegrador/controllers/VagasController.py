@@ -48,7 +48,17 @@ class VagasController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def vaga(request, vaga_id):
+        """
+        It checks if the user is logged in, if he is, it checks if he has a curriculum, if he doesn't, it
+        creates one, then it checks if the vacancy is published, if it is, it checks if the user has already
+        applied to the vacancy, if he has, it returns the vacancy page with the vacancy and the application
+        
+        :param request: The current request object
+        :param vaga_id: The id of the vaga you want to display
+        :return: a render of the template vaga/index.html with the parameters vaga and aplicacao.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -72,7 +82,16 @@ class VagasController():
         })
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def aplicar_em_vaga(request, vaga_id):
+        """
+        It creates a new application if the user has not applied to the job yet, or redirects to the job
+        page if the user has already applied to the job
+        
+        :param request: The current request object
+        :param vaga_id: The id of the job you want to apply to
+        :return: Aplicacao.objects.filter(vagas__id=vaga_id, curriculos__id=usuario.curriculo.id)
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
@@ -100,7 +119,15 @@ class VagasController():
         return redirect('vaga', vaga.id)
 
     @user_passes_test(Usuario.user_is_Usuario, login_url="login-usuario")
+        
     def desaplicar_em_vaga(request, vaga_id):
+        """
+        It deletes an application from the database
+        
+        :param request: The current request object
+        :param vaga_id: The id of the job you want to apply to
+        :return: a redirect to the vaga page.
+        """
 
         usuario = Usuario.objects.select_related('curriculo').get(id=request.user.id)
 
